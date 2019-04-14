@@ -23,7 +23,6 @@ public abstract class App {
     public long			m_thisFrameTick;
     public int			m_nCptLoop;
     public boolean		m_isRunning= true;
-    public boolean		m_isFullScreen;
 
     private Random      objRandom;
 

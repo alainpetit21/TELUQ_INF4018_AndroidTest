@@ -1,6 +1,5 @@
 package com.bianisoft.androittest;
 
-import android.graphics.PointF;
 import android.opengl.GLSurfaceView;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +8,17 @@ import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import com.bianisoft.engine.App;
-import com.bianisoft.engine.manager.MyGLRenderer;
+import com.bianisoft.engine.manager.MngrGLRendererAndroid;
+import com.bianisoft.engine.manager.MngrSensorInterpretedLinearAcceleration;
+import com.bianisoft.engine.manager.MngrSensorPositionalMappingUsingGravity;
 
 public class MainActivity extends AppCompatActivity {
 
     private GLSurfaceView glSurfaceView;
     private MyApp objApp;
-    private MyGLRenderer renderer;
+    private MngrGLRendererAndroid objMngrRenderer;
+    private MngrSensorPositionalMappingUsingGravity objMngrSensorsPositional;
+    private MngrSensorInterpretedLinearAcceleration objMngrSensorsLinearAccel;
 
     private boolean hasGoneThroughLoading = false;
 
@@ -63,21 +65,35 @@ public class MainActivity extends AppCompatActivity {
         objApp= new MyApp(displayMetrics.widthPixels, displayMetrics.heightPixels);
         objApp.m_objAndroidContext= this;
 
-        renderer = new MyGLRenderer();
+        objMngrRenderer = new MngrGLRendererAndroid();
         glSurfaceView = new GLSurfaceView(this);
-        glSurfaceView.setRenderer(renderer);
+        glSurfaceView.setRenderer(objMngrRenderer);
         setContentView(glSurfaceView);
 
         //timerHandlerLoading.postDelayed(timerLoading, 1);
         timerHandlerRunnable.postDelayed(timerRunnable, 16);
+
+
+        objMngrSensorsPositional = new MngrSensorPositionalMappingUsingGravity(this);
+        objMngrSensorsLinearAccel = new MngrSensorInterpretedLinearAcceleration(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timerHandlerRunnable.removeCallbacks(timerRunnable);
+        //timerHandlerLoading.removeCallbacks(timerLoading);
+        objMngrSensorsPositional.onDestroy();
+        objMngrSensorsLinearAccel.onDestroy();
+    }
     @Override
     protected void onResume() {
         super.onResume();
         timerHandlerRunnable.postDelayed(timerRunnable, 16);
         //timerHandlerLoading.postDelayed(timerLoading, 16);
         glSurfaceView.onResume();
+        objMngrSensorsPositional.onResume();
+        objMngrSensorsLinearAccel.onResume();
     }
 
     @Override
@@ -86,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
         timerHandlerRunnable.removeCallbacks(timerRunnable);
         //timerHandlerLoading.removeCallbacks(timerLoading);
         glSurfaceView.onPause();
+        objMngrSensorsPositional.onPause();
+        objMngrSensorsLinearAccel.onPause();
     }
 
     @Override

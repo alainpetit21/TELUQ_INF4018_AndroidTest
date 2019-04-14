@@ -57,6 +57,7 @@ public class PhysObj extends Obj{
 
         private PhysObj				m_physObj;
         private Sextulpe			m_ptFrom= new Sextulpe();
+        private Sextulpe			m_ptLatestAdd= new Sextulpe();
         private ArrayList<Sextulpe>	m_pathTo= new ArrayList<Sextulpe>();
         private ArrayList<Real>		m_pathToTimer= new ArrayList<Real>();
         private boolean				m_isOn= false;
@@ -86,7 +87,7 @@ public class PhysObj extends Obj{
             m_physObj.m_vAngle[2]= m_ptFrom.m_vData[5];
         }
 
-        public void moveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS){
+        public void OverrideNextMoveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS) {
             Sextulpe newSept= new Sextulpe();
             newSept.m_vData[0]= p_fPosX;
             newSept.m_vData[1]= p_fPosY;
@@ -96,8 +97,58 @@ public class PhysObj extends Obj{
             newSept.m_vData[5]= p_fAngleZ;
 
             readData();
-            if(!(m_ptFrom.getDeltaLenght(newSept) > 0))
+
+            //If already at this destination Stop
+            float distance = m_ptFrom.getDeltaLenght(newSept);
+            if(!(distance > 0.75))
                 return;
+
+            //If already planing to go there
+            distance = m_ptLatestAdd.getDeltaLenght(newSept);
+            if(!(distance > 0.75))
+                return;
+
+            m_ptLatestAdd.m_vData[0]= newSept.m_vData[0];
+            m_ptLatestAdd.m_vData[1]= newSept.m_vData[1];
+            m_ptLatestAdd.m_vData[2]= newSept.m_vData[2];
+            m_ptLatestAdd.m_vData[3]= newSept.m_vData[3];
+            m_ptLatestAdd.m_vData[4]= newSept.m_vData[4];
+            m_ptLatestAdd.m_vData[5]= newSept.m_vData[5];
+
+            m_pathTo.remove(m_pathTo.size()-1);
+            m_pathTo.add(newSept);
+            m_pathToTimer.remove(m_pathToTimer.size()-1);
+            m_pathToTimer.add(new Real(p_nNbMS));
+            m_isOn= true;
+        }
+
+        public void AddMoveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS){
+            Sextulpe newSept= new Sextulpe();
+            newSept.m_vData[0]= p_fPosX;
+            newSept.m_vData[1]= p_fPosY;
+            newSept.m_vData[2]= p_fPosZ;
+            newSept.m_vData[3]= p_fAngleX;
+            newSept.m_vData[4]= p_fAngleY;
+            newSept.m_vData[5]= p_fAngleZ;
+
+            readData();
+
+            //If already at this destination Stop
+            float distance = m_ptFrom.getDeltaLenght(newSept);
+            if(!(distance > 0.75))
+                return;
+
+            //If already planing to go there
+            distance = m_ptLatestAdd.getDeltaLenght(newSept);
+            if(!(distance > 0.75))
+                return;
+
+            m_ptLatestAdd.m_vData[0]= newSept.m_vData[0];
+            m_ptLatestAdd.m_vData[1]= newSept.m_vData[1];
+            m_ptLatestAdd.m_vData[2]= newSept.m_vData[2];
+            m_ptLatestAdd.m_vData[3]= newSept.m_vData[3];
+            m_ptLatestAdd.m_vData[4]= newSept.m_vData[4];
+            m_ptLatestAdd.m_vData[5]= newSept.m_vData[5];
 
             m_pathTo.add(newSept);
             m_pathToTimer.add(new Real(p_nNbMS));
@@ -282,13 +333,22 @@ public class PhysObj extends Obj{
         return m_vOrientaion;
     }
 
-    public void rotateTo(float p_fAngleZ, int p_nNbMS)	{moveTo(getPosX(), getPosY(), getPosZ(), getAngleX(), getAngleY(), p_fAngleZ, p_nNbMS);}
-    public void rotateTo(float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS)	{moveTo(getPosX(), getPosY(), getPosZ(), p_fAngleX, p_fAngleY, p_fAngleZ, p_nNbMS);}
+    public void AddRotateTo(float p_fAngleZ, int p_nNbMS)	{AddMoveTo(getPosX(), getPosY(), getPosZ(), getAngleX(), getAngleY(), p_fAngleZ, p_nNbMS);}
+    public void AddRotateTo(float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS)	{AddMoveTo(getPosX(), getPosY(), getPosZ(), p_fAngleX, p_fAngleY, p_fAngleZ, p_nNbMS);}
 
-    public void moveTo(float  p_fPosX, float p_fPosY, int p_nNbMS)	{moveTo(p_fPosX, p_fPosY, getPosZ(), getAngleX(), getAngleY(), getAngleZ(), p_nNbMS);}
-    public void moveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, int p_nNbMS)	{moveTo(p_fPosX, p_fPosY, p_fPosZ, getAngleX(), getAngleY(), getAngleZ(), p_nNbMS);}
-    public void	moveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS){
-        m_objMoveToCtrl.moveTo(p_fPosX, p_fPosY, p_fPosZ, p_fAngleX, p_fAngleY, p_fAngleZ, p_nNbMS);
+    public void OverrideNextMoveTo(float  p_fPosX, float p_fPosY, int p_nNbMS)	{OverrideNextMoveTo(p_fPosX, p_fPosY, getPosZ(), getAngleX(), getAngleY(), getAngleZ(), p_nNbMS);}
+    public void OverrideNextMoveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, int p_nNbMS)	{OverrideNextMoveTo(p_fPosX, p_fPosY, p_fPosZ, getAngleX(), getAngleY(), getAngleZ(), p_nNbMS);}
+    public void	OverrideNextMoveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS) {
+        if(m_objMoveToCtrl.m_isOn && m_objMoveToCtrl.m_pathTo.size() >= 2)
+            m_objMoveToCtrl.OverrideNextMoveTo(p_fPosX, p_fPosY, p_fPosZ, p_fAngleX, p_fAngleY, p_fAngleZ, p_nNbMS);
+        else
+            m_objMoveToCtrl.AddMoveTo(p_fPosX, p_fPosY, p_fPosZ, p_fAngleX, p_fAngleY, p_fAngleZ, p_nNbMS);
+    }
+
+    public void AddMoveTo(float  p_fPosX, float p_fPosY, int p_nNbMS)	{AddMoveTo(p_fPosX, p_fPosY, getPosZ(), getAngleX(), getAngleY(), getAngleZ(), p_nNbMS);}
+    public void AddMoveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, int p_nNbMS)	{AddMoveTo(p_fPosX, p_fPosY, p_fPosZ, getAngleX(), getAngleY(), getAngleZ(), p_nNbMS);}
+    public void	AddMoveTo(float  p_fPosX, float p_fPosY, float p_fPosZ, float p_fAngleX, float p_fAngleY, float p_fAngleZ, int p_nNbMS){
+        m_objMoveToCtrl.AddMoveTo(p_fPosX, p_fPosY, p_fPosZ, p_fAngleX, p_fAngleY, p_fAngleZ, p_nNbMS);
     }
 
     public boolean isMoving(){
@@ -330,6 +390,16 @@ public class PhysObj extends Obj{
             m_vPos[1]+= m_vVel[1] * p_fTimeScaleFactor;
             m_vPos[2]+= m_vVel[2] * p_fTimeScaleFactor;
         }
+    }
+
+    public void ApplyGenericFriction(float p_fRatio){
+        m_vAngleVel[0]*= p_fRatio;
+        m_vAngleVel[1]*= p_fRatio;
+        m_vAngleVel[2]*= p_fRatio;
+
+        m_vVel[0]*= p_fRatio;
+        m_vVel[1]*= p_fRatio;
+        m_vVel[2]*= p_fRatio;
     }
 
     public String toString() {

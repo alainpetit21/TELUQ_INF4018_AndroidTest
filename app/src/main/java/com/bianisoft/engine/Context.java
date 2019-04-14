@@ -42,7 +42,7 @@ public class Context extends Obj{
 
     private Obj			m_objWithKeyFocus;
 
-    protected ArrayList<PhysObj>	m_vecPhysObj			= new ArrayList<PhysObj>();
+    protected ArrayList<PhysObj>	m_vecPhysObj			= new ArrayList<>();
 
     public int	m_nIndex;
 
@@ -86,6 +86,18 @@ public class Context extends Obj{
     public void addChild(PhysObj p_physObj){
         m_vecPhysObj.add(p_physObj);
     }
+
+    public PhysObj getChild(int p_nIdx){
+        if(p_nIdx == -1){
+            if(m_vecPhysObj.size() > 0 )
+                return m_vecPhysObj.get(m_vecPhysObj.size() -1);
+            else
+                return null;
+        }
+
+        return m_vecPhysObj.get(p_nIdx);
+    }
+
 
     public void manage(float p_fRatioMovement){
         for(PhysObj physObj1 : m_vecPhysObj){

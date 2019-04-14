@@ -17,12 +17,12 @@ import android.util.Log;
 import com.bianisoft.engine.App;
 import com.bianisoft.engine.PhysObj;
 
-public class MyGLRenderer implements Renderer {
+public class MngrGLRendererAndroid implements Renderer {
     protected ShortBuffer m_bufVertices;
     protected ShortBuffer m_bufVertices2;
     private PointF surfaceSize;
 
-    public MyGLRenderer(){
+    public MngrGLRendererAndroid(){
         surfaceSize = new PointF();
     }
 
@@ -47,6 +47,10 @@ public class MyGLRenderer implements Renderer {
         gl.glMatrixMode(GL10.GL_PROJECTION);        // set matrix to projection mode
         gl.glLoadIdentity();                        // reset the matrix to its default state
         gl.glFrustumf(-ratio, ratio, -1, 1, 1, 25);  // apply the projection matrix
+
+        //Go through all object in app and reload the textures
+        if(App.g_theApp.m_ctxCur != null)
+            App.g_theApp.m_ctxCur.loadAllRes(gl);
     }
 
     public void onDrawFrameDebug(GL10 gl) {
@@ -56,7 +60,19 @@ public class MyGLRenderer implements Renderer {
     public void onDrawFrame(GL10 gl) {
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
-        GLU.gluLookAt(gl, 0, 0, -5, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+
+        //By default for now the "Eye" will be "attached" to the last item in the context, minus 15 in Z
+        float lookAtZ = 10;
+
+        if(App.g_theApp.m_ctxCur != null) {
+            PhysObj objLockedOn= App.g_theApp.m_ctxCur.getChild(-1);
+
+            if(objLockedOn != null) {
+                lookAtZ = objLockedOn.getPosZ();
+            }
+        }
+
+        GLU.gluLookAt(gl, 0, 0, lookAtZ - 15, 0f, 0f, lookAtZ, 0f, 1.0f, 0.0f);
 
 
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
@@ -64,4 +80,14 @@ public class MyGLRenderer implements Renderer {
         if(App.g_theApp.m_ctxCur != null)
             App.g_theApp.m_ctxCur.draw(gl);
     }
+
+    public void onDestroy() {
+    }
+
+    public void onResume() {
+    }
+
+    public void onPause() {
+    }
+
 }
