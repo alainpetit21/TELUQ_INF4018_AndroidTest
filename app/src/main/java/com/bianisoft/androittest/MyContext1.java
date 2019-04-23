@@ -54,16 +54,18 @@ public class MyContext1 extends Context{
         Random objRandom= new Random(0);
         arStars = new ArrayList<>();
 
-        for(int i= 0; i < 1000; ++i){
+        for(int i= 0; i < 250; ++i){
             Triangle2D temp= new Triangle2D(0);
 
-            temp.setTextID("MiniStars");
-            temp.setPos(objRandom.nextInt(20) - 10f, objRandom.nextInt(20) - 10f, objRandom.nextInt(100));
+            temp.setTextID("MiniStars" + String.valueOf(i));
+            temp.setPos(objRandom.nextInt(20) - 10f, objRandom.nextInt(20) - 10f, objRandom.nextInt(50));
             temp.load();
             temp.show();
             temp.setAngleVelZ(40);
             temp.setZoom(0.2f);
             temp.setFilterColor(0f, 0f, 0f, 1f);
+
+            arStars.add(temp);
             addChild(temp);
         }
 
@@ -88,24 +90,34 @@ public class MyContext1 extends Context{
 
     }
 
-    public void manage(float p_nRatioMove){
+    public void manage(float p_nRatioMove) {
         super.manage(p_nRatioMove);
 
         MngrSensorPositionalMappingUsingGravity mngrSensorPosMapping = MngrSensorPositionalMappingUsingGravity.getInstance();
         MngrSensorInterpretedLinearAcceleration mngrSensorLinearInt = MngrSensorInterpretedLinearAcceleration.getInstance();
 
-        float[] nPosToMoveTo= mngrSensorPosMapping.getPos();
+        float[] nPosToMoveTo = mngrSensorPosMapping.getPos();
 
-        if(nPosToMoveTo[0] < -10)   nPosToMoveTo[0]= -10;
-        if(nPosToMoveTo[1] < -10)   nPosToMoveTo[1]= -10;
-        if(nPosToMoveTo[0] > 10)   nPosToMoveTo[0]= 10;
-        if(nPosToMoveTo[1] > 10)   nPosToMoveTo[1]= 10;
+        if (nPosToMoveTo[0] < -10) nPosToMoveTo[0] = -10;
+        if (nPosToMoveTo[1] < -10) nPosToMoveTo[1] = -10;
+        if (nPosToMoveTo[0] > 10) nPosToMoveTo[0] = 10;
+        if (nPosToMoveTo[1] > 10) nPosToMoveTo[1] = 10;
 
         objCube.OverrideNextMoveTo(nPosToMoveTo[0], nPosToMoveTo[1], 400);  //Do Some sort of bitfield to only manage certain field of the MoveTO
 
         //Managed Indirect Movement Management PREVENTS Direct Movement Management, thus we overload it here
-        objCube.setVelZ(mngrSensorLinearInt.getValue()[1]/250);
-        objCube.setPosZ(objCube.getPosZ()+objCube.getVelZ());
+        objCube.setVelZ(mngrSensorLinearInt.getValue()[1] / 250);
+        objCube.setPosZ(objCube.getPosZ() + objCube.getVelZ());
+
+
+        for (Triangle2D objStar : arStars) {
+            if (objStar.getPosZ() < (objCube.getPosZ() - 25)) {
+                objStar.setPosZ(objCube.getPosZ() + 50);
+            }
+            else if (objStar.getPosZ() > (objCube.getPosZ() + 50)) {
+                objStar.setPosZ(objCube.getPosZ() - 25);
+            }
+        }
     }
 
     public void draw(GL10 gl) {

@@ -68,8 +68,8 @@ public class MngrSensorInterpretedLinearAcceleration implements SensorEventListe
 
                     if (nIgnoringCountPerAxis[i] <= 0) {
                         if (Math.abs(vLinearAccel[i]) > 2f) {
-                            vValue[i] = Math.copySign(Math.min(Math.abs(vLinearAccel[i]) - 2f, 5f) * 3.3f, vLinearAccel[i]);
-                            nIgnoringCountPerAxis[i]= 2000;
+                            vValue[i] = Math.copySign(Math.min(Math.abs(vLinearAccel[i]) - 2f, 5f) * 3.3f, vLinearAccel[i]);    //Theses values will be saved in RawSensorCommand
+                            nIgnoringCountPerAxis[i]= 500;
                         }
                     }else {
                         nIgnoringCountPerAxis[i] -= 100;

@@ -59,8 +59,8 @@ public class MngrSensorPositionalMappingUsingGravity implements SensorEventListe
                 long diffTime = (curTime - lastUpdateGravity);
                 lastUpdateGravity = curTime;
 
-                vGravity[0] = event.values[0];
-                vGravity[1] = event.values[1];
+                vGravity[0] = event.values[0];  //Theses values *2 will be saved in RawSensorCommand
+                vGravity[1] = event.values[1];  //Theses values *2 will be saved in RawSensorCommand
                 vGravity[2] = event.values[2];
 
                 vPos[0]= vGravity[0]*2;
