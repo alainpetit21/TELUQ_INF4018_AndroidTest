@@ -131,7 +131,7 @@ public class Object3D extends Drawable{
 
         gl.glPushMatrix();
 
-        gl.glTranslatef(getPosX(), getPosY(), getPosZ());
+        gl.glTranslatef(getPosX(), getPosY(), -getPosZ());
         gl.glScalef(m_nZoom, m_nZoom, m_nZoom);
         gl.glRotatef(getAngleX(), 1.0f, 0.0f, 0.0f);
         gl.glRotatef(getAngleY(), 0.0f, 1.0f, 0.0f);

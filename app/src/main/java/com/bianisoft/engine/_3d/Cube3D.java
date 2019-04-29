@@ -93,8 +93,9 @@ public class Cube3D extends Object3D{
 
         gl.glPushMatrix();
 
-        gl.glTranslatef(getPosX(), getPosY(), getPosZ());
+        gl.glTranslatef(getPosX(), getPosY(), -getPosZ());
         gl.glScalef(m_nZoom, m_nZoom, m_nZoom);
+        gl.glScalef(m_nScaleX, m_nScaleY, m_nScaleZ);
         gl.glRotatef(getAngleX(), 1.0f, 0.0f, 0.0f);
         gl.glRotatef(getAngleY(), 0.0f, 1.0f, 0.0f);
         gl.glRotatef(getAngleZ(), 0.0f, 0.0f, 1.0f);

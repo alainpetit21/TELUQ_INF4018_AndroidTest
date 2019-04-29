@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import com.bianisoft.engine.manager.MngrGLRendererAndroid;
 import com.bianisoft.engine.manager.MngrSensorInterpretedLinearAcceleration;
 import com.bianisoft.engine.manager.MngrSensorPositionalMappingUsingGravity;
+import com.bianisoft.androittest.presentation.MyApp;
+
 
 public class MainActivity extends AppCompatActivity {
 

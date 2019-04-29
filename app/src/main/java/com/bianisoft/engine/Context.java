@@ -34,24 +34,20 @@ import javax.microedition.khronos.opengles.GL10;
 
 
 public class Context extends Obj{
-    public static final int COUNTAINER_TYPE_INFINITE	= 0;
-    public static final int COUNTAINER_TYPE_WORLD_2D	= 1;
-    public static final int COUNTAINER_TYPE_WORLD_3D	= 2;
-    public static final int COUNTAINER_TYPE_CAMERA_2D	= 3;
-    public static final int COUNTAINER_TYPE_CAMERA_3D	= 4;
+    public static final int COUNTAINER_TYPE_INFINITE= 0;
+    public static final int COUNTAINER_TYPE_WORLD	= 1;
+    public static final int COUNTAINER_TYPE_CAMERA	= 3;
 
-    private Obj			m_objWithKeyFocus;
+    protected ArrayList<PhysObj> arPhysObj = new ArrayList<>();
 
-    protected ArrayList<PhysObj>	m_vecPhysObj			= new ArrayList<>();
-
+    public PhysObj objCam;
     public int	m_nIndex;
-
-    public boolean	m_is3DFirst= true;
 
 
     public Context(){
         super(IDCLASS_Context);
-        m_objWithKeyFocus= this;
+        objCam= new PhysObj();
+        objCam.setPos(0,0,0);
     }
 
     public void activate(){
@@ -74,45 +70,62 @@ public class Context extends Obj{
     public void addChild(Object3D p_obj3D)	{addChild(p_obj3D, false, false);}
     public void addChild(Object3D p_obj3D, boolean p_isAttachedToCamera)	{addChild(p_obj3D, p_isAttachedToCamera, false);}
     public void addChild(Object3D p_obj3D, boolean p_isAttachedToCamera, boolean p_isInInfinity){
-        m_vecPhysObj.add(p_obj3D);
+        arPhysObj.add(p_obj3D);
     }
 
     public void addChild(Drawable p_objDrawable)	{addChild(p_objDrawable, false, false);}
     public void addChild(Drawable p_objDrawable, boolean p_isAttachedToCamera)	{addChild(p_objDrawable, p_isAttachedToCamera, false);}
     public void addChild(Drawable p_objDrawable, boolean p_isAttachedToCamera, boolean p_isInInfinity){
-        m_vecPhysObj.add(p_objDrawable);
+        arPhysObj.add(p_objDrawable);
     }
 
     public void addChild(PhysObj p_physObj){
-        m_vecPhysObj.add(p_physObj);
+        arPhysObj.add(p_physObj);
     }
 
     public PhysObj getChild(int p_nIdx){
         if(p_nIdx == -1){
-            if(m_vecPhysObj.size() > 0 )
-                return m_vecPhysObj.get(m_vecPhysObj.size() -1);
+            if(arPhysObj.size() > 0 )
+                return arPhysObj.get(arPhysObj.size() -1);
             else
                 return null;
         }
 
-        return m_vecPhysObj.get(p_nIdx);
+        return arPhysObj.get(p_nIdx);
     }
 
+    private void manageSort(){
+        for(int i= 0; i < arPhysObj.size(); ++i){
+            PhysObj physObj1= arPhysObj.get(i);
+
+            for(int j= i+1; j < arPhysObj.size(); ++j){
+                PhysObj physObj2= arPhysObj.get(j);
+
+                if(physObj2.getPosZ() > physObj1.getPosZ()){
+                    arPhysObj.set(i, physObj2);
+                    arPhysObj.set(j, physObj1);
+                    i= -1;
+                    break;
+                }
+            }
+        }
+    }
 
     public void manage(float p_fRatioMovement){
-        for(PhysObj physObj1 : m_vecPhysObj){
+        manageSort();
+
+        for(PhysObj physObj1 : arPhysObj){
             physObj1.manage(p_fRatioMovement);
         }
     }
 
     public void draw(GL10 gl) {
-        for(PhysObj physObject : m_vecPhysObj)
+        for(PhysObj physObject : arPhysObj)
             ((Drawable)physObject).draw(gl);
     }
 
     public void loadAllRes(GL10 gl) {
-        for(PhysObj physObject : m_vecPhysObj)
+        for(PhysObj physObject : arPhysObj)
                 ((Drawable)physObject).loadRes(gl);
     }
-
 }
