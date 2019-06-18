@@ -1,4 +1,4 @@
-package com.bianisoft.androittest.application;
+package com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement;
 
 import java.util.ArrayList;
 import com.bianisoft.androittest.domain.GameCommand;

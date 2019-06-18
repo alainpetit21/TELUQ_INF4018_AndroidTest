@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import com.bianisoft.engine.manager.MngrTouchScreen;
 import com.bianisoft.engine.manager.MngrGLRendererAndroid;
 import com.bianisoft.engine.manager.MngrSensorInterpretedLinearAcceleration;
 import com.bianisoft.engine.manager.MngrSensorPositionalMappingUsingGravity;
@@ -16,8 +17,8 @@ import com.bianisoft.androittest.presentation.MyApp;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GLSurfaceView glSurfaceView;
     private MyApp objApp;
+    private GLSurfaceView glSurfaceView;
     private MngrGLRendererAndroid objMngrRenderer;
     private MngrSensorPositionalMappingUsingGravity objMngrSensorsPositional;
     private MngrSensorInterpretedLinearAcceleration objMngrSensorsLinearAccel;
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         objMngrRenderer = new MngrGLRendererAndroid();
         glSurfaceView = new GLSurfaceView(this);
         glSurfaceView.setRenderer(objMngrRenderer);
+        glSurfaceView.setOnTouchListener(new MngrTouchScreen());
+
         setContentView(glSurfaceView);
 
         //timerHandlerLoading.postDelayed(timerLoading, 1);

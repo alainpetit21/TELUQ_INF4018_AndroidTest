@@ -1,6 +1,8 @@
-package com.bianisoft.androittest.application;
+package com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement;
 
 import java.util.ArrayList;
+
+import com.bianisoft.androittest.application.ApplicationFacade;
 import com.bianisoft.androittest.domain.DomainFacade;
 import com.bianisoft.androittest.domain.GameCommand;
 import com.bianisoft.androittest.domain.PlayerShip;

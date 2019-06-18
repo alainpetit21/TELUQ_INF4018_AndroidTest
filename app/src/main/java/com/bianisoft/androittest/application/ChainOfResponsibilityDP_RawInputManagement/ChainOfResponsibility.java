@@ -1,6 +1,8 @@
-package com.bianisoft.androittest.application;
+package com.bianisoft.androittest.application.ChainOfResponsibilityDP_RawInputManagement;
 
 import java.util.ArrayList;
+
+import com.bianisoft.androittest.application.ApplicationFacade;
 import com.bianisoft.androittest.domain.RawSensorsCommand;
 
 

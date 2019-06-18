@@ -76,7 +76,7 @@ public class MngrSensorInterpretedLinearAcceleration implements SensorEventListe
                     }
                 }
 
-                System.out.printf("Managing Linear Acceleration Sensor : RawData : %2.5f\t,%2.5f\t,%2.5f\t\tInterpreted as : %2.5f\t,%2.5f\t,%2.5f\n", vLinearAccel[0], vLinearAccel[1], vLinearAccel[2], vValue[0], vValue[1], vValue[2]);
+                // System.out.printf("Managing Linear Acceleration Sensor : RawData : %2.5f\t,%2.5f\t,%2.5f\t\tInterpreted as : %2.5f\t,%2.5f\t,%2.5f\n", vLinearAccel[0], vLinearAccel[1], vLinearAccel[2], vValue[0], vValue[1], vValue[2]);
             }
         }
     }

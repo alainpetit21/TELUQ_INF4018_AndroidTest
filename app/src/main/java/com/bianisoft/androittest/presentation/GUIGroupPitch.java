@@ -27,11 +27,11 @@ public class GUIGroupPitch extends Drawable implements IDomainRawSensorObserver{
     public void draw(GL10 gl) {
         if(nValue > 0 ){
             //This is the code for 0
-            sprNeedle.setPos(0f, -2.8f + (nValue/20), -1.2f);
+            sprNeedle.setPos(-1.5f, -3.1f + (nValue/20), -1.2f);
             sprNeedle.setAngleZ(180);
         }else{
             //This is the code for 10
-            sprNeedle.setPos(0f, -2.55f + (nValue/20), -1.2f);
+            sprNeedle.setPos(-1.5f, -2.85f + (nValue/20), -1.2f);
             sprNeedle.setAngleZ(0);
         }
 
@@ -42,7 +42,8 @@ public class GUIGroupPitch extends Drawable implements IDomainRawSensorObserver{
     public void init(Context pCurCtx) {
         pCurCtx.addChild(sprBackGUIGroupPitch= new Sprite3D(R.drawable.back_gui_group_pitch));
         sprBackGUIGroupPitch.setZoom(3.73f/4);
-        sprBackGUIGroupPitch.setPos(0f, -2.7f, -1.11f);
+        sprBackGUIGroupPitch.setScaleX(1.33f);
+        sprBackGUIGroupPitch.setPos(-1.5f, -3f, -1.11f);
         sprBackGUIGroupPitch.load();
         
         pCurCtx.addChild(sprNeedle= new Triangle3D(R.drawable.needle_texture));

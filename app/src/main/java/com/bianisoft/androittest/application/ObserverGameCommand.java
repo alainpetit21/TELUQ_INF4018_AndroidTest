@@ -2,14 +2,22 @@ package com.bianisoft.androittest.application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.Strategy;
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.StrategyActionMoveDown;
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.StrategyActionMoveForward;
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.StrategyActionMoveLeft;
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.StrategyActionMoveReverse;
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.StrategyActionMoveRight;
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.StrategyActionMoveUp;
+import com.bianisoft.androittest.application.StrategyDP_GameplayCommandsManagement.StrategyDoNothing;
 import com.bianisoft.androittest.domain.GameCommand;
 import com.bianisoft.androittest.domain.IDomainGameCommandObserver;
-import com.bianisoft.androittest.application.helper.DirectionToKeyConverter;
 import com.bianisoft.androittest.domain.DomainFacade;
 
 
 public class ObserverGameCommand implements IDomainGameCommandObserver{
-    HashMap<Integer, Strategy> dicStrategyGameCommandHandler; 
+    HashMap<Integer, Strategy> dicStrategyGameCommandHandler;
 
     
     public ObserverGameCommand(){
@@ -17,13 +25,28 @@ public class ObserverGameCommand implements IDomainGameCommandObserver{
         
         dicStrategyGameCommandHandler= new HashMap<>();
         
-        dicStrategyGameCommandHandler.put((new DirectionToKeyConverter( 0, 0, 0)).getResult(), new StrategyDoNothing());
-        dicStrategyGameCommandHandler.put((new DirectionToKeyConverter( 1, 0, 0)).getResult(), new StrategyActionMoveRight());
-        dicStrategyGameCommandHandler.put((new DirectionToKeyConverter(-1, 0, 0)).getResult(), new StrategyActionMoveLeft());
-        dicStrategyGameCommandHandler.put((new DirectionToKeyConverter(0, -1, 0)).getResult(), new StrategyActionMoveUp());
-        dicStrategyGameCommandHandler.put((new DirectionToKeyConverter(0,  1, 0)).getResult(), new StrategyActionMoveDown());
-        dicStrategyGameCommandHandler.put((new DirectionToKeyConverter(0, 0,  1)).getResult(), new StrategyActionMoveForward());
-        dicStrategyGameCommandHandler.put((new DirectionToKeyConverter(0, 0, -1)).getResult(), new StrategyActionMoveReverse());
+        dicStrategyGameCommandHandler.put((getKeyFromDirection( 0, 0, 0)), new StrategyDoNothing());
+        dicStrategyGameCommandHandler.put((getKeyFromDirection( 1, 0, 0)), new StrategyActionMoveRight());
+        dicStrategyGameCommandHandler.put((getKeyFromDirection(-1, 0, 0)), new StrategyActionMoveLeft());
+        dicStrategyGameCommandHandler.put((getKeyFromDirection(0, -1, 0)), new StrategyActionMoveUp());
+        dicStrategyGameCommandHandler.put((getKeyFromDirection(0,  1, 0)), new StrategyActionMoveDown());
+        dicStrategyGameCommandHandler.put((getKeyFromDirection(0, 0,  1)), new StrategyActionMoveForward());
+        dicStrategyGameCommandHandler.put((getKeyFromDirection(0, 0, -1)), new StrategyActionMoveReverse());
+    }
+
+    public int getKeyFromDirection(int p_movementXAxis, int p_movementYAxis, int p_movementZAxis){
+        int nKeyResult = 0;
+
+        nKeyResult |= (p_movementXAxis>0)?(1<<0):0;
+        nKeyResult |= (p_movementXAxis<0)?(1<<1):0;
+
+        nKeyResult |= (p_movementYAxis>0)?(1<<2):0;
+        nKeyResult |= (p_movementYAxis<0)?(1<<3):0;
+
+        nKeyResult |= (p_movementZAxis>0)?(1<<4):0;
+        nKeyResult |= (p_movementZAxis<0)?(1<<5):0;
+
+        return nKeyResult;
     }
 
     @Override
@@ -34,9 +57,9 @@ public class ObserverGameCommand implements IDomainGameCommandObserver{
         GameCommand objGameCommand= pArrayListCommands.get(nIdxToStart);
         
         Strategy objStrategyToUse= dicStrategyGameCommandHandler.get(
-                                        (new DirectionToKeyConverter(objGameCommand.nTransformationX, 
-                                                                     objGameCommand.nTransformationY, 
-                                                                     objGameCommand.nTransformationZ)).getResult());
+                                        (getKeyFromDirection(objGameCommand.nTransformationX,
+                                                objGameCommand.nTransformationY,
+                                                objGameCommand.nTransformationZ)));
 
         objStrategyToUse.execute(pArrayListCommands, nIdxToStart);
     }

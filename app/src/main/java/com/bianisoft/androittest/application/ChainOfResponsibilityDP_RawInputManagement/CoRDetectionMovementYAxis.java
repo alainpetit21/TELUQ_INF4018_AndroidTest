@@ -1,11 +1,11 @@
-package com.bianisoft.androittest.application;
+package com.bianisoft.androittest.application.ChainOfResponsibilityDP_RawInputManagement;
 
 import java.util.ArrayList;
 import com.bianisoft.androittest.domain.DomainFacade;
 import com.bianisoft.androittest.domain.RawSensorsCommand;
 
 
-public class CoRDetectionMovementXAxis extends ChainOfResponsibility{
+public class CoRDetectionMovementYAxis extends ChainOfResponsibility{
     
     @Override
     public boolean Handle(ArrayList<RawSensorsCommand> pArRawSensorCommand, int pNIdxToStart){
@@ -14,12 +14,12 @@ public class CoRDetectionMovementXAxis extends ChainOfResponsibility{
         
         for(int i= pNIdxToStart; i < pArRawSensorCommand.size(); ++i){
             RawSensorsCommand objSensorRead2= pArRawSensorCommand.get(i);
-            int nValueRoll = objSensorRead2.nRotationRoll;
+            int nValuePitch = objSensorRead2.nRotationPitch;
 
-            for(int j= 0; j < Math.abs(nValueRoll); ++j)  
-                objDomain.addGameCommand(nValueRoll / Math.abs(nValueRoll), 0, 0);
+            for(int j= 0; j < Math.abs(nValuePitch); ++j)  
+                objDomain.addGameCommand(0, nValuePitch / Math.abs(nValuePitch), 0);
         }
-                    
+
         //In usual Chain of Responsibility, only one "handler" will take care of 
         //a situation. However in this usage, this class can handle X and Y axis 
         // detection and the successor can detect the Z axis (which typicaly use

@@ -37,10 +37,10 @@ public class PlayerShip extends SpaceShip{
     
     public void MoveRight() { setAccelX(getAccelX() + ACCEL_MAX); }
     
-    public void MoveForward() { setAccelZ(getAccelZ() + ACCEL_MAX); }
-    
-    public void MoveReverse(){
-        setAccelZ(getAccelZ() - ACCEL_MAX);
+    public void MoveZ(float p_nSpeed) {
+        //System.out.print ("PlayerShip SetVel : " + p_nSpeed + "\n");
+        setVelZ(p_nSpeed /10.0f);
+
     }
 
     public String GetPlayerName(){

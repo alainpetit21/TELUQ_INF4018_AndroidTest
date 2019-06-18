@@ -44,25 +44,25 @@ public class GUIGroupToolbar extends Drawable{
         pCurCtx.addChild(btRecord= new Sprite3D(R.drawable.bt_record));
         btRecord.setZoom(0.3f);
         btRecord.setScaleX(3f);
-        btRecord.setPos(2.9f, 3.5f, -1.1f);
+        btRecord.setPos(2.9f, 3.65f, -1.1f);
         btRecord.load();
 
         pCurCtx.addChild(btStop= new Sprite3D(R.drawable.bt_stop));
         btStop.setZoom(0.3f);
         btStop.setScaleX(3f);
-        btStop.setPos(1f, 3.5f, -1.1f);
+        btStop.setPos(1f, 3.65f, -1.1f);
         btStop.load();
 
         pCurCtx.addChild(btSend= new Sprite3D(R.drawable.bt_send));
         btSend.setZoom(0.3f);
         btSend.setScaleX(3f);
-        btSend.setPos(-1f, 3.5f, -1.1f);
+        btSend.setPos(-1f, 3.65f, -1.1f);
         btSend.load();
 
         pCurCtx.addChild(btQuit= new Sprite3D(R.drawable.bt_quit));
         btQuit.setZoom(0.3f);
         btQuit.setScaleX(3f);
-        btQuit.setPos(-2.9f, 3.5f, -1.1f);
+        btQuit.setPos(-2.9f, 3.65f, -1.1f);
         btQuit.load();
     }
 }

@@ -19,7 +19,7 @@ public class GUICountainer extends Drawable{
         setPosZ(-1);
         
         pCurCtx.addChild(objGUIBackground= new Sprite3D(R.drawable.back_gui));
-        objGUIBackground.setZoom(3.73f);
+        objGUIBackground.setZoom(4f);
         objGUIBackground.setPosZ(-1);
         objGUIBackground.load();
         
