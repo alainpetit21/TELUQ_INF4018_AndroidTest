@@ -9,6 +9,8 @@ import com.bianisoft.engine._3d.Triangle3D;
 import com.bianisoft.engine._2d.Label2D;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
 import com.bianisoft.androittest.model.DomainFacade;
 import com.bianisoft.androittest.model.IDomainRawSensorObserver;
 import com.bianisoft.androittest.model.RawSensorsCommand;
@@ -55,7 +57,9 @@ public class GUIGroupPitch extends Drawable implements IDomainRawSensorObserver{
         DomainFacade.getFacadeObject().registerObserverForRawSensorCollection(this);
 
         pCurCtx.addChild(lblWrittenValue= new Label2D());
-        lblWrittenValue.setText("Hello World");
+        lblWrittenValue.setText("");
+        lblWrittenValue.setZoom(0.25f);
+        lblWrittenValue.setPos(-3.75f, -5.5f, -1.11f);
         lblWrittenValue.load();
     }
 
@@ -64,5 +68,8 @@ public class GUIGroupPitch extends Drawable implements IDomainRawSensorObserver{
         RawSensorsCommand obj= pLstRawSensorCommands.get(pLstRawSensorCommands.size()-1);
         
         nValue= obj.nRotationPitch;
+
+        String buf = String.format(Locale.getDefault(), "Pitch: %.0f", nValue);
+        lblWrittenValue.setText(buf);
     }
 }

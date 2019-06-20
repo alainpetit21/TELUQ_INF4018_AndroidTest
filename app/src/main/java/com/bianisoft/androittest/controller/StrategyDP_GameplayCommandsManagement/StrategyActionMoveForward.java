@@ -12,9 +12,9 @@ public class StrategyActionMoveForward implements Strategy{
 
     @Override
     public void execute(ArrayList<GameCommand> pArGameCommand, int pNIdxToStart){
-        PlayerShip objPlayer = (PlayerShip) DomainFacade.getFacadeObject().getWorld().getPlayerShip();
+        PlayerShip objPlayer = DomainFacade.getFacadeObject().getWorld().getPlayerShip();
         
-        objPlayer.MoveZ(pArGameCommand.get(pNIdxToStart).nTransformationZ*2);
+        objPlayer.MoveZ(pArGameCommand.get(pNIdxToStart).nTransformationZ);
         
         //Update the GameCommand Start Idx
         ApplicationFacade.getFacadeObject().IncrementGameCommandIdxToStart();

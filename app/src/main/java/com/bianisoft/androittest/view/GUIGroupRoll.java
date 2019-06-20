@@ -4,6 +4,8 @@ import com.bianisoft.androittest.R;
 import com.bianisoft.engine.Screen;
 import com.bianisoft.engine.Drawable;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import com.bianisoft.androittest.model.DomainFacade;
 import com.bianisoft.androittest.model.IDomainRawSensorObserver;
 import com.bianisoft.androittest.model.RawSensorsCommand;
@@ -42,6 +44,12 @@ public class GUIGroupRoll extends Drawable implements IDomainRawSensorObserver{
         sprNeedle.setPos(2.5f, -3f, -1.2f);
         sprNeedle.load();
 
+        pCurCtx.addChild(lblWrittenValue= new Label2D());
+        lblWrittenValue.setText("");
+        lblWrittenValue.setZoom(0.25f);
+        lblWrittenValue.setPos(2.75f, -5.5f, -1.11f);
+        lblWrittenValue.load();
+
         DomainFacade.getFacadeObject().registerObserverForRawSensorCollection(this);
     }
 
@@ -50,5 +58,7 @@ public class GUIGroupRoll extends Drawable implements IDomainRawSensorObserver{
         RawSensorsCommand obj= pLstRawSensorCommands.get(pLstRawSensorCommands.size()-1);
         
         nValue= obj.nRotationRoll;
+        String buf = String.format(Locale.getDefault(), "Roll: %.0f", nValue);
+        lblWrittenValue.setText(buf);
     }
 }

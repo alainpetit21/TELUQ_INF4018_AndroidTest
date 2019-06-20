@@ -38,8 +38,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 
 public class ScrGameScreen extends Screen {
-    GUICountainer   objGUICountainer;
-    WorldPresenter  objWorldPresenter;
+    private GUICountainer   objGUICountainer;
+    private WorldPresenter  objWorldPresenter;
     private Sprite3D backCalibration;
 
 
@@ -59,7 +59,7 @@ public class ScrGameScreen extends Screen {
 
         objCam.setPos(0f, 0.1f, -10f);
 
-        MngrTouchScreen.getInstance().setMovementY(-1);
+        MngrTouchScreen.getInstance().setMovementY(-2);
     }
 
     public void manage(float p_nRatioMove) {
@@ -72,15 +72,16 @@ public class ScrGameScreen extends Screen {
         float[] nValuesSensorsXY = mngrSensorPosMapping.getPos();
         int nValueZ = (mgrTouchScreen.getMovementY() / 50);
 
-        if (nValueZ > -1) {
-            nValueZ = -1;
-        } else if (nValueZ < -10){
-            nValueZ = -10;
+        if (nValueZ > -2) {
+            nValueZ = -2;
+            MngrTouchScreen.getInstance().setMovementY(nValueZ*50);
+        } else if (nValueZ < -20){
+            nValueZ = -20;
+            MngrTouchScreen.getInstance().setMovementY(nValueZ*50);
         }
 
-        MngrTouchScreen.getInstance().setMovementY(nValueZ);
 
-        ApplicationFacade.getFacadeObject().addRawCommand((int)nValuesSensorsXY[0], (int)nValuesSensorsXY[1], (int)(-nValueZ));
+        ApplicationFacade.getFacadeObject().addRawCommand((int)nValuesSensorsXY[0], (int)nValuesSensorsXY[1], (-nValueZ));
     }
 
     public void draw(GL10 gl) {

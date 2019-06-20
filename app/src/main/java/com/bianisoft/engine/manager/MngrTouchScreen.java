@@ -6,15 +6,15 @@ import android.view.View;
 public class MngrTouchScreen implements View.OnTouchListener {
     private static MngrTouchScreen objThisInstance;
 
-    boolean bIsOn;
-    int nPosXActionDown;
-    int nPosYActionDown;
+    private boolean bIsOn;
+    private int nPosXActionDown;
+    private int nPosYActionDown;
 
-    int nMovementX;
-    int nMovementY;
+    private int nMovementX;
+    private int nMovementY;
 
-    int nLastMovementX;
-    int nLastMovementY;
+    private int nLastMovementX;
+    private int nLastMovementY;
 
     public MngrTouchScreen() {
         objThisInstance = this;
@@ -61,10 +61,16 @@ public class MngrTouchScreen implements View.OnTouchListener {
     }
 
     public void setMovementX(int p_nValue){
-        nMovementX= nLastMovementX= p_nValue;
+        if(!bIsOn)
+            nMovementX= nLastMovementX= p_nValue;
+        else
+            nMovementX= p_nValue;
     }
     public void setMovementY(int p_nValue){
-        nMovementY= nLastMovementY= p_nValue;
+        if(!bIsOn)
+            nMovementY= nLastMovementY= p_nValue;
+        else
+            nMovementY= p_nValue;
     }
 
     public static MngrTouchScreen getInstance(){
