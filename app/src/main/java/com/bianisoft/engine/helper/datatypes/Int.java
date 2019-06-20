@@ -33,9 +33,9 @@ public class Int{
     public void set(int p_nValue)	{m_nValue= p_nValue;}
     public int get()				{return m_nValue;}
 
-    public boolean isSmallerThan(Int p_nOther){return get() < p_nOther.get();}
-    public int incAfter(){int t= get(); m_nValue++; return t;}
-    public int incBefore(){m_nValue++; return m_nValue;}
+    public boolean isSmallerThan(Int p_nOther)  {return get() < p_nOther.get();}
+    public int incAfter()                       {int t= get(); m_nValue++; return t;}
+    public int incBefore()                      {m_nValue++; return m_nValue;}
 
-    public String toString() {return "" + m_nValue;}
+    public String toString()        {return "" + m_nValue;}
 }

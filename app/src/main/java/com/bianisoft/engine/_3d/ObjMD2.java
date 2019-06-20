@@ -2,11 +2,10 @@ package com.bianisoft.engine._3d;
 
 import android.content.Context;
 
-import com.bianisoft.engine.App;
+import com.bianisoft.engine.FrontendApp;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -47,7 +46,7 @@ public class ObjMD2 extends Object3D {
     public void loadRes(GL10 gl) {
         super.loadRes(gl);
 
-        loadModel(gl, App.g_theApp.m_objAndroidContext);
+        loadModel(gl, FrontendApp.getContext());
     }
 
     public void loadModel(GL10 gl, Context context) {

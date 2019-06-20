@@ -1,72 +1,65 @@
 package com.bianisoft.engine._2d;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.opengl.GLUtils;
 
-import com.bianisoft.androittest.R;
 import com.bianisoft.engine.Drawable;
+import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.manager.MngrFont.GLText;
+
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Label2D extends Drawable{
+public class Label2D extends Drawable {
+    private static GLText objGLText;                             // A GLText Instance
+
     private String strTextToDisplay;
-    int[] textureIDs;
 
 
     public Label2D(){
-        textureIDs = new int[1];
+
     }
 
     public void setText(String pText){
         strTextToDisplay= pText;
     }
 
-    // Load an image into GL texture
-    public void loadBackgroundTexture(GL10 gl, Context context, int nRes) {
+    public void loadRes(GL10 gl) {
+        loadTypeface(gl, FrontendApp.getContext());
+    }
+
+    public void loadTypeface(GL10 gl, Context context){
+        if(objGLText == null){
+            // Create the GLText
+            objGLText = new GLText( gl, context.getAssets() );
+
+            // Load the font from file (set size + padding), creates the texture
+            // NOTE: after a successful call to this the font is ready for rendering!
+            objGLText.load( "Roboto-Regular.ttf", 14, 2, 2 );  // Create Font (Height: 14 Pixels / X+Y Padding 2 Pixels)
+        }
     }
 
     public void load(){
-
     }
-    
-    public void draw(GL10 gl){
-        // THIS IS THE CODE FOR ANDROID
-        // Create an empty, mutable bitmap
-        Bitmap bitmap = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888);
-        // get a canvas to paint over the bitmap
-        Canvas canvas = new Canvas(bitmap);
-        bitmap.eraseColor(0);
 
-        // Draw the text
-        Paint textPaint = new Paint();
-        textPaint.setTextSize(32);
-        textPaint.setAntiAlias(true);
-        textPaint.setARGB(0xff, 0x00, 0x00, 0x00);
-        // draw the text centered
-        canvas.drawText("Hello World", 16,112, textPaint);
+    public void draw(GL10 gl) {
+        gl.glPushMatrix();
 
-        //Generate one texture pointer...
-        gl.glGenTextures(1, textureIDs, 0);
-        //...and bind it to our array
-        gl.glBindTexture(GL10.GL_TEXTURE_2D, textureIDs[0]);
-        gl.glEnable(GL10.GL_TEXTURE_2D);  // Enable texture (NEW)
+        gl.glTranslatef(getPosX(), getPosY(), getPosZ());
+        gl.glScalef(m_nZoom/10, m_nZoom/10, m_nZoom/10);
+        gl.glRotatef(getAngleX(), 1.0f, 0.0f, 0.0f);
+        gl.glRotatef(getAngleY(), 0.0f, 1.0f, 0.0f);
+        gl.glRotatef(getAngleZ()+180, 0.0f, 0.0f, 1.0f);
 
-        //Create Nearest Filtered Texture
-        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
-        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+        gl.glEnable( GL10.GL_TEXTURE_2D );              // Enable Texture Mapping
+        gl.glEnable( GL10.GL_BLEND );                   // Enable Alpha Blend
+        gl.glBlendFunc( GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA );  // Set Alpha Blend Function
 
-        //Different possible texture parameters, e.g. GL10.GL_CLAMP_TO_EDGE
-        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_REPEAT);
-        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_T, GL10.GL_REPEAT);
+        objGLText.begin( 0.0f, 0.0f, 0.0f, 1.0f );         // Begin Text Rendering (Set Color WHITE)
+        objGLText.draw( strTextToDisplay, 0, 0 );          // Draw Test String
+        objGLText.end();                                   // End Text Rendering
 
-        //Use the Android GLUtils to specify a two-dimensional texture image from our bitmap
-        GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
-
-        //Clean up
+        gl.glPopMatrix();
         gl.glDisable(GL10.GL_TEXTURE_2D);  // Enable texture (NEW)
-        bitmap.recycle();
+        gl.glDisable(GL10.GL_BLEND);
     }
 }

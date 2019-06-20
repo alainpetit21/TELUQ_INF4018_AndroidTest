@@ -15,8 +15,8 @@ public class Triangle2D extends Object3D {
     protected FloatBuffer m_bufColors;
 
 
-    public Triangle2D(int p_stTextureFilename) {
-        super(p_stTextureFilename);
+    public Triangle2D() {
+        super();
         setSubClassID(TYPE_OTHER);
 
     }

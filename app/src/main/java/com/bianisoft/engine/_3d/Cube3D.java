@@ -2,19 +2,9 @@ package com.bianisoft.engine._3d;
 
 
 //Standard Java library imports
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.opengl.GLUtils;
 
-import com.bianisoft.engine.App;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -93,7 +83,7 @@ public class Cube3D extends Object3D{
 
         gl.glPushMatrix();
 
-        gl.glTranslatef(getPosX(), getPosY(), -getPosZ());
+        gl.glTranslatef(getPosX(), -getPosY(), -(getPosZ() ));
         gl.glScalef(m_nZoom, m_nZoom, m_nZoom);
         gl.glScalef(m_nScaleX, m_nScaleY, m_nScaleZ);
         gl.glRotatef(getAngleX(), 1.0f, 0.0f, 0.0f);

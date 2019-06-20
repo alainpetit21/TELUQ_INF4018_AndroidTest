@@ -45,7 +45,6 @@ public class Tunnel3D extends Object3D {
             for(int j= 0; j < 8; ++j){
                 vertices[(i*24)+(j*3)+0]= baseVertices[(j*3)+0];
                 vertices[(i*24)+(j*3)+1]= baseVertices[(j*3)+1];
-//                vertices[(i*24)+(j*3)+2]= (((baseVertices[(j*3)+2]/5f)+i)*5)+2f;
                 vertices[(i*24)+(j*3)+2]= (((baseVertices[(j*3)+2]/5f)-i)*5)+2f;
             }
         }
@@ -98,9 +97,7 @@ public class Tunnel3D extends Object3D {
 
         gl.glEnable(GL10.GL_BLEND);
         gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-//        gl.glTranslatef(getPosX(), getPosY(), 0);
-//        gl.glTranslatef(getPosX(), getPosY(), -((nSize*5)-getPosZ()));
-        gl.glTranslatef(getPosX(), getPosY(), -getPosZ());
+        gl.glTranslatef(getPosX(), -getPosY(), -getPosZ());
         gl.glScalef(m_nZoom, m_nZoom, m_nZoom);
         gl.glScalef(m_nScaleX, m_nScaleY, m_nScaleZ);
         gl.glRotatef(getAngleX(), 1.0f, 0.0f, 0.0f);

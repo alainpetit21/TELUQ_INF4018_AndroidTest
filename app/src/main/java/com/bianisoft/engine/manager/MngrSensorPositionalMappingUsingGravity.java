@@ -46,8 +46,8 @@ public class MngrSensorPositionalMappingUsingGravity implements SensorEventListe
         vPos[0]= 0f;
         vPos[1]= 0f;
 
-        //First 10 second of sensor seem to not be calibrated, skip those
-        lastUpdateGravity= System.currentTimeMillis() + 10000;
+        //First 9 second of sensor seem to not be calibrated, skip those
+        lastUpdateGravity= System.currentTimeMillis() + 9000;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class MngrSensorPositionalMappingUsingGravity implements SensorEventListe
                 vGravity[2] = event.values[2];
 
                 vPos[0]= -vGravity[0]*2;
-                vPos[1]= -vGravity[1]*2;
+                vPos[1]= vGravity[1]*2;
 
 //                System.out.printf("Got Gravity Data : %2.5f\t%2.5f\t%2.5f\n", vGravity[0], vGravity[1], vGravity[2]);
             }
