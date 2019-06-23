@@ -407,5 +407,6 @@ public class PhysObj extends Obj{
     }
 
     public void load()	{	}
+    public void unload()	{	}
 }
 

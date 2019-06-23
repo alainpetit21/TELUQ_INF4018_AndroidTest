@@ -16,8 +16,8 @@ public class Triangle3D extends Object3D {
         textureIDs = new int[1];   // Array for 1 texture-ID (NEW)
     }
 
-    public void load(){
-        super.load();
+    public void loadRes(GL10 gl){
+        super.loadRes(gl);
 
         float vertices[]= {
                 -1.0f, 1.0f,  0.0f,	    0.0f, -1.0f,  0.0f,   	1.0f,  1.0f,  0.0f,
@@ -52,7 +52,7 @@ public class Triangle3D extends Object3D {
 
 
     public void draw(GL10 gl){
-        if(!isShown() || textureIDs == null)
+        if(!isShown() || !isLoaded())
             return;
 
         if((m_bufVertices == null) || (m_bufIndices == null) || (m_bufUV == null))

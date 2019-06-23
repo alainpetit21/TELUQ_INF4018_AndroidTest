@@ -43,6 +43,10 @@ public class FrontendApp extends Application {
         FrontendApp.theApp.isRunning = false;
     }
 
+    public static boolean isRunning(){
+        return FrontendApp.theApp.isRunning;
+    }
+
     public static Context getContext() {
         return mContext;
     }
@@ -107,6 +111,7 @@ public class FrontendApp extends Application {
     }
 
     public void load(){};
+    public void unload(){};
 
     public String getVersion() { return "";}
 }

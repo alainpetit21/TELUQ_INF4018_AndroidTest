@@ -24,24 +24,27 @@ public class Label2D extends Drawable {
     }
 
     public void loadRes(GL10 gl) {
+        super.loadRes(gl);
         loadTypeface(gl, FrontendApp.getContext());
     }
 
     public void loadTypeface(GL10 gl, Context context){
-        if(objGLText == null){
-            // Create the GLText
-            objGLText = new GLText( gl, context.getAssets() );
+        // Create the GLText
+        objGLText = new GLText( gl, context.getAssets() );
 
-            // Load the font from file (set size + padding), creates the texture
-            // NOTE: after a successful call to this the font is ready for rendering!
-            objGLText.load( "Roboto-Regular.ttf", 14, 2, 2 );  // Create Font (Height: 14 Pixels / X+Y Padding 2 Pixels)
-        }
+        // Load the font from file (set size + padding), creates the texture
+        // NOTE: after a successful call to this the font is ready for rendering!
+        objGLText.load( "Roboto-Regular.ttf", 14, 2, 2 );  // Create Font (Height: 14 Pixels / X+Y Padding 2 Pixels)
     }
 
-    public void load(){
+    public void unload(){
+        objGLText= null;
     }
 
     public void draw(GL10 gl) {
+        if(!isShown() || !isLoaded())
+            return;
+
         gl.glPushMatrix();
 
         gl.glTranslatef(getPosX(), getPosY(), getPosZ());

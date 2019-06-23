@@ -64,6 +64,8 @@ public class Object3D extends Drawable{
         super(IDCLASS_Object3D);
 
         nResTexture = p_nResIDTexture;
+
+        textureIDs = new int[1];   // Array for 1 texture-ID (NEW)
     }
 
     public Object3D(Object3D p_obj3D){
@@ -87,6 +89,7 @@ public class Object3D extends Drawable{
     }
 
     public void loadRes(GL10 gl) {
+        super.loadRes(gl);
 
         loadTexture(gl, FrontendApp.getContext());
     }
@@ -96,6 +99,9 @@ public class Object3D extends Drawable{
         if (textureIDs == null)
             return;
 
+        if(nResTexture == -1)
+            return;
+
         gl.glGenTextures(1, textureIDs, 0); // Generate texture-ID array
 
         gl.glBindTexture(GL10.GL_TEXTURE_2D, textureIDs[0]);   // Bind to texture ID
@@ -103,11 +109,9 @@ public class Object3D extends Drawable{
         gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
         gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
 
-        // Construct an input stream to texture image "res\drawable\nehe.png"
         InputStream istream = context.getResources().openRawResource(nResTexture);
         Bitmap bitmap;
         try {
-            // Read and decode input as bitmap
             bitmap = BitmapFactory.decodeStream(istream);
         } finally {
             try {
@@ -120,11 +124,8 @@ public class Object3D extends Drawable{
         bitmap.recycle();
     }
 
-    public boolean	isLoaded()		{return textureIDs != null;}
-
-
     public void draw(GL10 gl){
-        if(!isShown() || textureIDs == null)
+        if(!isShown() || !isLoaded())
             return;
 
         if((m_bufVertices == null) || (m_bufIndices == null) || (m_bufUV == null))

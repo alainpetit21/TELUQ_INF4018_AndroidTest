@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PrototypeTELUQ_INF4018</string>
+    <string name="Lbl_Title_Launch_Game">Launch Game!!</string>
+    <string name="Lbl_Title_Quit_Game">Quit</string>
+    <string name="Lbl_Title_ServerAddress">Server Address</string>
+    <string name="Lbl_Title_Title">INF4018 Project</string>
+    <string name="Lbl_Title_SubTitle">(a Zaxxon game remake)</string>
+
 </resources>

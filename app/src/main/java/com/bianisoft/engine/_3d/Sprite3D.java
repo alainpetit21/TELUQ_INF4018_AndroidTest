@@ -12,8 +12,6 @@ public class Sprite3D extends Object3D{
     public Sprite3D(int p_nTextureFilename){
         super(p_nTextureFilename);
         setSubClassID(TYPE_OTHER);
-
-        textureIDs = new int[1];   // Array for 1 texture-ID (NEW)
     }
 
     public void load(){
@@ -52,7 +50,7 @@ public class Sprite3D extends Object3D{
 
 
     public void draw(GL10 gl){
-        if(!isShown() || textureIDs == null)
+        if(!isShown() || !isLoaded())
             return;
 
         if((m_bufVertices == null) || (m_bufIndices == null) || (m_bufUV == null))

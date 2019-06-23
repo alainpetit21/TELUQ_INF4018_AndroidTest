@@ -42,20 +42,27 @@ public class Screen extends Obj{
 
     public PhysObj objCam;
     public int	m_nIndex;
+    private boolean hasFinishedLoadingLogic;
+    private boolean hasFinishedLoadingRes;
 
 
     public Screen(){
         super(IDCLASS_Context);
         objCam= new PhysObj();
         objCam.setPos(0,0,0);
+
+        hasFinishedLoadingLogic = false;
+        hasFinishedLoadingRes = false;
     }
 
     public void activate(){
-
+        hasFinishedLoadingLogic = true;
     }
 
     public void deActivate(){
-
+        for(PhysObj physObj1 : arPhysObj){
+            physObj1.unload();
+        }
     }
 
     public void removeAllChilds(){
@@ -112,6 +119,9 @@ public class Screen extends Obj{
     }
 
     public void manage(float p_fRatioMovement){
+        if(!hasFinishedLoadingLogic)
+            return;
+
         manageSort();
 
         for(PhysObj physObj1 : arPhysObj){
@@ -120,12 +130,23 @@ public class Screen extends Obj{
     }
 
     public void draw(GL10 gl) {
+        if(!hasFinishedLoadingLogic)
+            return;
+
+        //If we are trying to draw without any Res (mismatch Sync between GL creation and Logic creation)
+        //Then force the loading of res here on the first draw using Android Context and Android GL object
+        //Saved in theApp.
+        if(!hasFinishedLoadingRes)
+            loadAllRes(gl);
+
         for(PhysObj physObject : arPhysObj)
             ((Drawable)physObject).draw(gl);
     }
 
     public void loadAllRes(GL10 gl) {
+        hasFinishedLoadingRes = true;
+
         for(PhysObj physObject : arPhysObj)
-                ((Drawable)physObject).loadRes(gl);
+            ((Drawable)physObject).loadRes(gl);
     }
 }

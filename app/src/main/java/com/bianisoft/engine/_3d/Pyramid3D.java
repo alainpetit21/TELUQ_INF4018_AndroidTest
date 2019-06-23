@@ -12,71 +12,67 @@ import javax.microedition.khronos.opengles.GL10;
 public class Pyramid3D extends Object3D{
     private static final int TYPE_OTHER= 0x03;
 
-    float vertices3[]= {
-             0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,
-             0.0f,  0.0f,  1.0f,	 1.0f, -1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,	 1.0f,  1.0f, -1.0f,
-             1.0f, -1.0f, -1.0f,	-1.0f, -1.0f, -1.0f,	 1.0f,  1.0f, -1.0f,	-1.0f,  1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,	-1.0f,  1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,
-            -1.0f, -1.0f, -1.0f,	 1.0f, -1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,
-             0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,	-1.0f,  1.0f, -1.0f,	 1.0f,  1.0f, -1.0f,
-    };
-
-    float texCoords3[]= {
-            0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
-            0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
-            0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
-            0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
-            0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
-            0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
-    };
-
-    short indices3[]= {
-            0,   1,  3,		 0,  3,  2,
-            4,   5,  7,		 4,  7,  6,
-            8,   9, 11,		 8, 11, 10,
-            12, 13, 15,		12, 15, 14,
-            16, 17, 19,		16, 19, 18,
-            20, 21, 23,		20, 23, 22,
-    };
 
     public Pyramid3D(int p_nTextureFilename){
         super(p_nTextureFilename);
         setSubClassID(TYPE_OTHER);
-
-        textureIDs = new int[1];   // Array for 1 texture-ID (NEW)
     }
 
-    public void load() {
-        super.load();
+    public void loadRes(GL10 gl) {
+        super.loadRes(gl);
+
+        float vertices3[]= {
+                0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,
+                0.0f,  0.0f,  1.0f,	 1.0f, -1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,	 1.0f,  1.0f, -1.0f,
+                1.0f, -1.0f, -1.0f,	-1.0f, -1.0f, -1.0f,	 1.0f,  1.0f, -1.0f,	-1.0f,  1.0f, -1.0f,
+               -1.0f, -1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,	-1.0f,  1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,
+               -1.0f, -1.0f, -1.0f,	 1.0f, -1.0f, -1.0f,	 0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,
+                0.0f,  0.0f,  1.0f,	 0.0f,  0.0f,  1.0f,	-1.0f,  1.0f, -1.0f,	 1.0f,  1.0f, -1.0f,
+        };
+
+        float texCoords3[]= {
+                0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
+                0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
+                0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
+                0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
+                0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
+                0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f,		1.0f, 1.0f,
+        };
+
+        short indices3[]= {
+                0,   1,  3,		 0,  3,  2,
+                4,   5,  7,		 4,  7,  6,
+                8,   9, 11,		 8, 11, 10,
+                12, 13, 15,		12, 15, 14,
+                16, 17, 19,		16, 19, 18,
+                20, 21, 23,		20, 23, 22,
+        };
+
         // Setup vertex-array buffer. Vertices in float. An float has 4 bytes
-        ByteBuffer vbb3 = ByteBuffer.allocateDirect(vertices3.length * 4);
+        ByteBuffer vbb3 = ByteBuffer.allocateDirect((m_nNbVertices= vertices3.length) * 4);
         vbb3.order(ByteOrder.nativeOrder()); // Use native byte order
         m_bufVertices = vbb3.asFloatBuffer(); // Convert from byte to float
         m_bufVertices.put(vertices3);         // Copy data into buffer
         m_bufVertices.position(0);           // Rewind
 
         // Setup texture-coords-array buffer, in float. An float has 4 bytes (NEW)
-        ByteBuffer tbb3 = ByteBuffer.allocateDirect(texCoords3.length * 4);
+        ByteBuffer tbb3 = ByteBuffer.allocateDirect(m_nNbVertices * 4);
         tbb3.order(ByteOrder.nativeOrder());
         m_bufUV = tbb3.asFloatBuffer();
         m_bufUV.put(texCoords3);
         m_bufUV.position(0);
 
 
-        ByteBuffer ibb3 = ByteBuffer.allocateDirect((indices3.length) * 2);
+        ByteBuffer ibb3 = ByteBuffer.allocateDirect((m_nNbIndices= indices3.length) * 2);
         ibb3.order(ByteOrder.nativeOrder());
         m_bufIndices= ibb3.asShortBuffer();
         m_bufIndices.put(indices3);
         m_bufIndices.position(0);
     }
 
-    public void manage(float p_nMoveRatio){
-        super.manage(p_nMoveRatio);
-    }
-
       public void draw(GL10 gl){
-        if(!isShown() || textureIDs == null)
-            return;
+          if(!isShown() || !isLoaded())
+              return;
 
         if((m_bufVertices == null) || (m_bufIndices == null) || (m_bufUV == null))
             return;
@@ -105,7 +101,7 @@ public class Pyramid3D extends Object3D{
 
         gl.glBindTexture(GL10.GL_TEXTURE_2D, textureIDs[0]);
 
-        gl.glDrawElements(GL10.GL_TRIANGLES, indices3.length, GL10.GL_UNSIGNED_SHORT, m_bufIndices);
+        gl.glDrawElements(GL10.GL_TRIANGLES, m_nNbIndices, GL10.GL_UNSIGNED_SHORT, m_bufIndices);
 
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);  // Disable texture-coords-array (NEW)

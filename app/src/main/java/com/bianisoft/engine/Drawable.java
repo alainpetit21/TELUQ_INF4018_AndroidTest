@@ -4,7 +4,8 @@ package com.bianisoft.engine;
 import javax.microedition.khronos.opengles.GL10;
 
 public class Drawable extends PhysObj{
-    public boolean	m_isShown		= true;
+    private boolean	m_isShown		= true;
+    private boolean m_isResLoaded   = false;
     public boolean	m_isCameraBound	= false;
     public boolean	m_isInInfinity	= false;
 
@@ -217,5 +218,7 @@ public class Drawable extends PhysObj{
     }
 
     public void draw(GL10 gl){}
-    public void loadRes(GL10 gl){}
+
+    public void loadRes(GL10 gl)    {m_isResLoaded   = true; }
+    public boolean	isLoaded()		{return m_isResLoaded;}
 }

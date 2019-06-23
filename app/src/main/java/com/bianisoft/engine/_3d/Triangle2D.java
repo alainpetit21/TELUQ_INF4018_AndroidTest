@@ -21,8 +21,8 @@ public class Triangle2D extends Object3D {
 
     }
 
-    public void load() {
-        super.load();
+    public void loadRes(GL10 gl) {
+        super.loadRes(gl);
 
         float vertices[] = {
                 0f, 1f,
@@ -64,7 +64,7 @@ public class Triangle2D extends Object3D {
     }
 
     public void draw(GL10 gl) {
-        if (!isShown() /*|| m_texImage == null*/)
+        if(!isShown() || !isLoaded())
             return;
 
         gl.glPushMatrix();

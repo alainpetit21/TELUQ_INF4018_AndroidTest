@@ -18,8 +18,8 @@ public class Tunnel3D extends Object3D {
         nSize= pnSize;
     }
 
-    public void load(){
-        super.load();
+    public void loadRes(GL10 gl){
+        super.loadRes(gl);
 
         float baseVertices[]= {
                 -5.0f, -5.0f,  0.0f,    -5.0f, -5.0f,  5.0f,    -5.0f,  5.0f,  0.0f,    -5.0f,  5.0f,  5.0f,
@@ -84,7 +84,7 @@ public class Tunnel3D extends Object3D {
     }
 
     public void draw(GL10 gl){
-        if(!isShown() || textureIDs == null)
+        if(!isShown() || !isLoaded())
             return;
 
         if((m_bufVertices == null) || (m_bufIndices == null) || (m_bufUV == null))

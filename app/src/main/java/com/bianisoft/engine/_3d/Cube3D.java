@@ -42,12 +42,12 @@ public class Cube3D extends Object3D{
     public Cube3D(int p_nTextureFilename){
         super(p_nTextureFilename);
         setSubClassID(TYPE_OTHER);
-
-        textureIDs = new int[1];   // Array for 1 texture-ID (NEW)
     }
 
-    public void load() {
-        super.load();
+    @Override
+    public void loadRes(GL10 gl) {
+        super.loadRes(gl);
+
         // Setup vertex-array buffer. Vertices in float. An float has 4 bytes
         ByteBuffer vbb3 = ByteBuffer.allocateDirect(vertices3.length * 4);
         vbb3.order(ByteOrder.nativeOrder()); // Use native byte order
@@ -75,7 +75,7 @@ public class Cube3D extends Object3D{
     }
 
       public void draw(GL10 gl){
-        if(!isShown() || textureIDs == null)
+        if(!isShown() || !isLoaded())
             return;
 
         if((m_bufVertices == null) || (m_bufIndices == null) || (m_bufUV == null))

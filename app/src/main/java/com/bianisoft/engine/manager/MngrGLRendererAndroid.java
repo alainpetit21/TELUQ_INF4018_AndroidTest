@@ -11,6 +11,7 @@ import android.opengl.GLU;
 
 import com.bianisoft.engine.FrontendApp;
 import com.bianisoft.engine.PhysObj;
+import com.bianisoft.engine.Screen;
 
 public class MngrGLRendererAndroid implements Renderer {
     protected ShortBuffer m_bufVertices;
@@ -29,9 +30,11 @@ public class MngrGLRendererAndroid implements Renderer {
 
         FrontendApp.setGL(gl);
 
-        //Go through all object in app and reload the textures
-        if(FrontendApp.getFrontendApp().getCurScreen() != null)
-            FrontendApp.getFrontendApp().getCurScreen().loadAllRes(gl);
+        //Go through all object in app and reload the textures, and activate the Screen
+        Screen curScr = FrontendApp.getFrontendApp().getCurScreen();
+        if(curScr != null) {
+            curScr.loadAllRes(gl);
+        }
     }
 
     public void onSurfaceChanged(GL10 gl, int width, int height) {
@@ -43,9 +46,11 @@ public class MngrGLRendererAndroid implements Renderer {
         gl.glLoadIdentity();                        // reset the matrix to its default state
         gl.glFrustumf(-1, 1, -1, 1, 1, 100);  // apply the projection matrix
 
-        //Go through all object in app and reload the textures
-        if(FrontendApp.getFrontendApp().getCurScreen() != null)
-            FrontendApp.getFrontendApp().getCurScreen().loadAllRes(gl);
+        //Go through all object in app and reload the textures, and activate the Screen
+        Screen curScr = FrontendApp.getFrontendApp().getCurScreen();
+        if(curScr != null) {
+            curScr.loadAllRes(gl);
+        }
     }
 
     public void onDrawFrameDebug(GL10 gl) {
@@ -81,6 +86,11 @@ public class MngrGLRendererAndroid implements Renderer {
     }
 
     public void onDestroy() {
+        //Go through all object in app and reload the textures, and activate the Screen
+        Screen curScr = FrontendApp.getFrontendApp().getCurScreen();
+        if(curScr != null) {
+            curScr.deActivate();
+        }
     }
 
     public void onResume() {
@@ -88,5 +98,4 @@ public class MngrGLRendererAndroid implements Renderer {
 
     public void onPause() {
     }
-
 }

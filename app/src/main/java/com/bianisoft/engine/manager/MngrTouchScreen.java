@@ -16,17 +16,23 @@ public class MngrTouchScreen implements View.OnTouchListener {
     private int nLastMovementX;
     private int nLastMovementY;
 
+    private int nPosLastClickX;
+    private int nPosLastClickY;
+
     public MngrTouchScreen() {
         objThisInstance = this;
 
-        this.bIsOn = false;
-        this.nPosXActionDown= -1;
-        this.nPosYActionDown= -1;
+        bIsOn = false;
+        nPosXActionDown= -1;
+        nPosYActionDown= -1;
 
-        this.nMovementX= 0;
-        this.nMovementY= 0;
-        this.nLastMovementX= 0;
-        this.nLastMovementY= 0;
+        nPosLastClickX= -1;
+        nPosLastClickY= -1;
+
+        nMovementX= 0;
+        nMovementY= 0;
+        nLastMovementX= 0;
+        nLastMovementY= 0;
     }
 
     @Override
@@ -34,17 +40,28 @@ public class MngrTouchScreen implements View.OnTouchListener {
         //System.out.print("\nonTouch(View v, MotionEvent event) " +event + "\n");
 
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            this.bIsOn= true;
-            this.nPosXActionDown = (int)event.getX();
-            this.nPosYActionDown = (int)event.getY();
+            bIsOn= true;
+            nPosXActionDown = (int)event.getX();
+            nPosYActionDown = (int)event.getY();
+            nPosLastClickX= -1;
+            nPosLastClickY= -1;
+
 
         }else if (event.getAction() == MotionEvent.ACTION_UP){
-            this.bIsOn= false;
-            this.nPosXActionDown = -1;
-            this.nPosYActionDown = -1;
-            nLastMovementX = nMovementX;
-            nLastMovementY = nMovementY;
+            bIsOn= false;
+            nPosXActionDown = -1;
+            nPosYActionDown = -1;
 
+            //If movement if smaller than 50 pixel, assuming that we are not trying to move, but click on a button
+            if((Math.abs(nMovementX) > 50) || (Math.abs(nMovementY) > 50)){
+                nLastMovementX = nMovementX;
+                nLastMovementY = nMovementY;
+            }else{
+                 //This is a click
+                nPosLastClickX= (int)event.getX();
+                nPosLastClickY= (int)event.getY();
+                v.performClick();
+            }
         }else if (event.getAction() == MotionEvent.ACTION_MOVE){
             nMovementX = (int)event.getX() - nPosXActionDown;
             nMovementY = (int)event.getY() - nPosYActionDown;
@@ -53,11 +70,43 @@ public class MngrTouchScreen implements View.OnTouchListener {
         return true;
     }
 
-    public int getMovementX(){
-        return bIsOn?nMovementX:nLastMovementX;
+    //Try to Change that to observer Pattern
+    public int getClickX(){
+        return nPosLastClickX;
     }
+
+    public int getClickY(){
+        return nPosLastClickY;
+    }
+
+    public int resetClicksystem(){
+        return nPosLastClickY= nPosLastClickX= -1;
+    }
+
+    //Basically threat lower than 50 as if it was not "activated" yet
+    public int getMovementX(){
+        if( bIsOn) {
+            if (Math.abs(nMovementX) > 50) {
+                return nMovementX;
+            }else {
+                return nLastMovementX;
+            }
+        }else {
+            return nLastMovementX;
+        }
+    }
+
+    //Basically threat lower than 50 as if it was not "activated" yet
     public int getMovementY(){
-        return bIsOn?nMovementY:nLastMovementY;
+        if( bIsOn) {
+            if (Math.abs(nMovementY) > 50) {
+                return nMovementY;
+            }else {
+                return nLastMovementY;
+            }
+        }else {
+            return nLastMovementY;
+        }
     }
 
     public void setMovementX(int p_nValue){

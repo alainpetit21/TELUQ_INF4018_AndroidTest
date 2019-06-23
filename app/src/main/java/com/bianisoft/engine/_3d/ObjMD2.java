@@ -14,7 +14,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class ObjMD2 extends Object3D {
     private static final int TYPE_MD2= 0x01;
 
-    private int	m_nResMesh;
+    private int	    m_nResMesh;
     private int		m_nNbFrames;
     private int		m_nVertexFrameOffset;
     private int		m_nVertexFrameSize;
@@ -28,11 +28,6 @@ public class ObjMD2 extends Object3D {
 
         setSubClassID(TYPE_MD2);
         setMeshFileName(p_nModelName);
-    }
-
-    public ObjMD2(ObjMD2 p_objMD2){
-        super((Object3D)p_objMD2);
-        m_nResMesh= p_objMD2.m_nResMesh;
     }
 
     public void setMeshFileName(int p_nResMesh){
@@ -50,9 +45,6 @@ public class ObjMD2 extends Object3D {
     }
 
     public void loadModel(GL10 gl, Context context) {
-        super.load();
-
-
         try {
             DataInputStream disLE = (DataInputStream)context.getResources().openRawResource(nResTexture);
 
@@ -163,7 +155,7 @@ public class ObjMD2 extends Object3D {
     }
 
     public void draw(GL10 gl){
-        if(!isShown() || textureIDs == null)
+        if(!isShown() || !isLoaded())
             return;
 
         if((m_bufVertices == null) || (m_bufUV == null))
