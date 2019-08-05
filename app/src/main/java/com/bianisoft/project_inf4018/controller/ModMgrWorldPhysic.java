@@ -7,11 +7,11 @@ import com.bianisoft.project_inf4018.model.World;
 
 public class ModMgrWorldPhysic {
 
-    public interface ICollicionCallback{
+    public interface ICollisionCallback {
         void onCollision(EntityGame obj1, EntityGame obj2);
     }
 
-    public void detectCollisions(World pobjWorld, ICollicionCallback objCallback) {
+    public void detectCollisions(World pobjWorld, ICollisionCallback objCallback) {
         //Look at all entities and process their physics
         for(EntityGame objShip : pobjWorld.arShips){
             float nShipX=  objShip.getPosX();

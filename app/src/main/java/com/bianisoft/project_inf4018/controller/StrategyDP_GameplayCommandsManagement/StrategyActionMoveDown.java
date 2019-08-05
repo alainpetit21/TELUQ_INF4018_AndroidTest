@@ -13,8 +13,8 @@ public class StrategyActionMoveDown implements Strategy{
     @Override
     public void execute(ArrayList<GameCommand> pArGameCommand, int pNIdxToStart){
         //Update the Domain EntityGame for ship
-        PlayerShip objPlayer= (PlayerShip) DomainFacade.getFacadeObject().getWorld().getPlayerShip();;
-        
+        PlayerShip objPlayer= DomainFacade.getFacadeObject().getWorld().getPlayerShip();
+
         objPlayer.MoveDown();
         
         //Update the GameCommand Start Idx

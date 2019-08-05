@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 
 public interface IDomainRawSensorObserver {
-    public void notify(ArrayList<RawSensorsCommand> pObj);
+    void notify(ArrayList<RawSensorsCommand> pObj);
 }

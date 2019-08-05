@@ -82,7 +82,7 @@ public class ModMgrRecorderPoster {
         
         String stURL = "http://192.168.0.133:8081/rest_service";
         stURL+= "?userID=" + DomainFacade.getFacadeObject().getWorld().getPlayerShip().GetPlayerName();
-        stURL+= "&time=" + Long.toString(Calendar.getInstance().getTime().getTime());
+        stURL+= "&time=" + Calendar.getInstance().getTime().getTime();
         
         URL obj = new URL(stURL);
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();

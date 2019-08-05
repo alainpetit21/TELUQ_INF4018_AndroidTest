@@ -24,17 +24,17 @@ public class Triangle2D extends Object3D {
     public void loadRes(GL10 gl) {
         super.loadRes(gl);
 
-        float vertices[] = {
+        float[] vertices = {
                 0f, 1f,
                 1f, -1f,
                 -1f, -1f,
         };
 
-        short indices[] = {
+        short[] indices = {
                 0, 1, 2
         };
 
-        float rgbaVal[] = {
+        float[] rgbaVal = {
                 1f, 0f, 0f, 1f,
                 0f, 1f, 0f, 1f,
                 0f, 0f, 1f, 1f

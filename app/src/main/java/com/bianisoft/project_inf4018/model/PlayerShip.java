@@ -16,17 +16,17 @@ public class PlayerShip extends SpaceShip{
     public PlayerShip(){
         super();
         isControllable= true;
-        setTextID("PlayerShip-" + Integer.toString(nIDEntity));
+        setTextID("PlayerShip-" + nIDEntity);
         setClassID(PlayerShip.CLS_ID);
         
         Random objRand= new Random();
-        stNamePlayer= "PlayerName-" + Integer.toString(objRand.nextInt(10000));
+        stNamePlayer= "PlayerName-" + objRand.nextInt(10000);
     }
     
     public PlayerShip(int pnPosX, int pnPosY, int pnPosZ, int pnWidthX, int pnHeighY, int pnDeptZ){
         super(pnPosX, pnPosY, pnPosZ, pnWidthX, pnHeighY, pnDeptZ);
         isControllable= true;
-        setTextID("PlayerShip-" + Integer.toString(nIDEntity));
+        setTextID("PlayerShip-" + nIDEntity);
         setClassID(PlayerShip.CLS_ID);
     }
 

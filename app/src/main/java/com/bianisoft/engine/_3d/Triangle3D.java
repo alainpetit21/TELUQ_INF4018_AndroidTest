@@ -19,16 +19,16 @@ public class Triangle3D extends Object3D {
     public void loadRes(GL10 gl){
         super.loadRes(gl);
 
-        float vertices[]= {
-                -1.0f, 1.0f,  0.0f,	    0.0f, -1.0f,  0.0f,   	1.0f,  1.0f,  0.0f,
+        float[] vertices = {
+                -1.0f, 1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
         };
 
-        float texture[]= {
-                0.0f, 1.0f,		0.5f, 0.0f,		1.0f, 1.0f,
+        float[] texture = {
+                0.0f, 1.0f, 0.5f, 0.0f, 1.0f, 1.0f,
         };
 
-        short indices[]= {
-                0,   1,  2,
+        short[] indices = {
+                0, 1, 2,
         };
 
         ByteBuffer vbb= ByteBuffer.allocateDirect((m_nNbVertices= vertices.length) * 4);

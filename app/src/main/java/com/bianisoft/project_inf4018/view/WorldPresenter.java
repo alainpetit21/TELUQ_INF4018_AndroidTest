@@ -19,7 +19,7 @@ import com.bianisoft.engine._3d.Tunnel3D;
 
 
 public class WorldPresenter extends Drawable{
-    public class CollisionResponse implements ModMgrWorldPhysic.ICollicionCallback{
+    public class CollisionResponse implements ModMgrWorldPhysic.ICollisionCallback {
 
         @Override
         public void onCollision(EntityGame obj1, EntityGame obj2) {

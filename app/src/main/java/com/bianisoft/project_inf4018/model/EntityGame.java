@@ -18,7 +18,7 @@ public class EntityGame extends PhysObj{
         nWidthX= 1;
         nHeighY= 1;
         nDepthZ= 1;
-        setTextID("GenericEntity-" + Integer.toString(++nIDEntity));
+        setTextID("GenericEntity-" + ++nIDEntity);
         setClassID(EntityGame.CLS_ID);
     }
 
@@ -27,7 +27,7 @@ public class EntityGame extends PhysObj{
         nWidthX= pnWidthX;
         nHeighY= pnHeighY;
         nDepthZ= pnDepthZ;
-        setTextID("GenericEntity-" + Integer.toString(++nIDEntity));
+        setTextID("GenericEntity-" + ++nIDEntity);
         setClassID(EntityGame.CLS_ID);
     }
 

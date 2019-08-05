@@ -38,7 +38,7 @@ public class MngrGLRendererAndroid implements Renderer {
     }
 
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        gl.glViewport(0, 0, (int) width, (int) height);
+        gl.glViewport(0, 0, width, height);
 
         float ratio = (float) width / height;
 

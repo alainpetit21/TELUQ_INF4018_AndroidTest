@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 
 import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.manager.MngrSensorGyroscopicRotationAcceleration;
 import com.bianisoft.engine.manager.MngrTouchScreen;
 import com.bianisoft.engine.manager.MngrGLRendererAndroid;
-import com.bianisoft.engine.manager.MngrSensorInterpretedLinearAcceleration;
 import com.bianisoft.engine.manager.MngrSensorPositionalMappingUsingGravity;
 import com.bianisoft.project_inf4018.controller.ApplicationFacade;
 import com.bianisoft.project_inf4018.model.DomainFacade;
@@ -21,7 +21,7 @@ public class ActivityGame extends AppCompatActivity {
 
     private MngrGLRendererAndroid objMngrRenderer;
     private MngrSensorPositionalMappingUsingGravity objMngrSensorsPositional;
-    private MngrSensorInterpretedLinearAcceleration objMngrSensorsLinearAccel;
+    private MngrSensorGyroscopicRotationAcceleration objMngrSensorsGyros;
 
 
     private Handler timerHandlerRunnable;
@@ -86,7 +86,7 @@ public class ActivityGame extends AppCompatActivity {
         timerHandlerCalibrating.postDelayed(timerCalibrating, 10000);
 
         objMngrSensorsPositional = new MngrSensorPositionalMappingUsingGravity(this);
-        objMngrSensorsLinearAccel = new MngrSensorInterpretedLinearAcceleration(this);
+        objMngrSensorsGyros = new MngrSensorGyroscopicRotationAcceleration(this);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class ActivityGame extends AppCompatActivity {
         timerHandlerRunnable.removeCallbacks(timerRunnable);
         objMngrRenderer.onDestroy();
         objMngrSensorsPositional.onDestroy();
-        objMngrSensorsLinearAccel.onDestroy();
+        objMngrSensorsGyros.onDestroy();
         objMngrRenderer.onDestroy();
 
         ApplicationFacade.forceSingletonDestruction();
@@ -108,7 +108,7 @@ public class ActivityGame extends AppCompatActivity {
         timerHandlerRunnable.postDelayed(timerRunnable, 16);
         glSurfaceView.onResume();
         objMngrSensorsPositional.onResume();
-        objMngrSensorsLinearAccel.onResume();
+        objMngrSensorsGyros.onResume();
         objMngrRenderer.onResume();
     }
 
@@ -118,7 +118,7 @@ public class ActivityGame extends AppCompatActivity {
         timerHandlerRunnable.removeCallbacks(timerRunnable);
         glSurfaceView.onPause();
         objMngrSensorsPositional.onPause();
-        objMngrSensorsLinearAccel.onPause();
+        objMngrSensorsGyros.onPause();
         objMngrRenderer.onPause();
     }
 

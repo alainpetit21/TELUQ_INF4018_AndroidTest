@@ -74,7 +74,7 @@ public class ObjMD2 extends Object3D {
 
             //Read UV
             int nPos= 0;
-            float uv[]= new float[nNumTexCoords * 2];
+            float[] uv = new float[nNumTexCoords * 2];
 
             disLE.reset();
             disLE.skipBytes(nOffsetTexCoords);
@@ -86,7 +86,7 @@ public class ObjMD2 extends Object3D {
 
             //Read Coordonnes
             nPos= 0;
-            float vertices[]= new float[nNumFrames*nNumVertices * 3];
+            float[] vertices = new float[nNumFrames * nNumVertices * 3];
 
             disLE.reset();
             disLE.skipBytes(nOffsetFrames);
@@ -142,9 +142,6 @@ public class ObjMD2 extends Object3D {
                 m_bufUV.put(uv[(uv2*2)+0]);	m_bufUV.put(uv[(uv2*2)+1]);
                 m_bufUV.put(uv[(uv3*2)+0]);	m_bufUV.put(uv[(uv3*2)+1]);
             }
-            int totot= m_bufVertices.position();
-            int totot2= m_bufUV.position();
-
             m_bufUV.position(0);
             m_bufVertices.position(0);
 

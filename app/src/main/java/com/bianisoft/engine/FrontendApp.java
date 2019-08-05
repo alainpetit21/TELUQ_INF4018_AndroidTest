@@ -110,8 +110,9 @@ public class FrontendApp extends Application {
         nCptLoop += 1;
     }
 
-    public void load(){};
-    public void unload(){};
+    public void load(){}
+
+    public void unload(){}
 
     public String getVersion() { return "";}
 }

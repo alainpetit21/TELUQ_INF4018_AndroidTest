@@ -12,7 +12,7 @@ public class SpaceShip extends EntityGame {
     
     public SpaceShip(){
         super();
-        setTextID("SpaceShip-" + Integer.toString(nIDEntity));
+        setTextID("SpaceShip-" + nIDEntity);
         setClassID(SpaceShip.CLS_ID);
     }
     
@@ -21,7 +21,7 @@ public class SpaceShip extends EntityGame {
         
         nShieldValue= 100;
         isControllable= false;
-        setTextID("SpaceShip-" + Integer.toString(nIDEntity));
+        setTextID("SpaceShip-" + nIDEntity);
         setClassID(SpaceShip.CLS_ID);
     }
 }

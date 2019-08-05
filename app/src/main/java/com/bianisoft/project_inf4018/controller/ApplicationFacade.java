@@ -67,22 +67,9 @@ public class ApplicationFacade {
         objDomain.addRawSensorCommand(p_nRoll, p_nPitch, p_nAccelZ);
     }
 
-    public void addRawCommand_Roll(int p_nValue){
+    public void addRawGyroCommand(int p_nAccelRoll, int p_nAccelPitch){
         DomainFacade objDomain= DomainFacade.getFacadeObject();
 
-        objDomain.addRawSensorCommand(p_nValue, 0, 0);
-    }
-
-    public void addRawCommand_Pitch(int p_nValue){
-        DomainFacade objDomain= DomainFacade.getFacadeObject();
-
-        objDomain.addRawSensorCommand(0, p_nValue, 0);
-    }
-
-
-    public void addRawCommand_AccelerationZ(int p_nValue){
-        DomainFacade objDomain= DomainFacade.getFacadeObject();
-
-        objDomain.addRawSensorCommand(0, 0, p_nValue);
+        objDomain.addRawSensorInformative(p_nAccelRoll, p_nAccelPitch);
     }
 }

@@ -26,7 +26,6 @@ public class ObserverRawSensorCommand implements IDomainRawSensorObserver{
     @Override
     public void notify(ArrayList<RawSensorsCommand> pArrayListCommands) {
         ApplicationFacade objApplicationFacade= ApplicationFacade.getFacadeObject();
-        DomainFacade objDomainFacade= DomainFacade.getFacadeObject();
         int nIdxToStart= objApplicationFacade.GetRawStartIdx();
 
         corRawToGameHandler.Run(pArrayListCommands, nIdxToStart);

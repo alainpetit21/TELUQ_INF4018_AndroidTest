@@ -9,13 +9,13 @@ public class WallObstacle extends EntityGame {
     
     public WallObstacle(){
         super();
-        setTextID("Wall-" + Integer.toString(nIDEntity));
+        setTextID("Wall-" + nIDEntity);
         setClassID(WallObstacle.CLS_ID);
     }
 
     public WallObstacle(int pnPosX, int pnPosY, int pnPosZ, int pnWidthX, int pnHeighY, int pnDeptZ){
         super(pnPosX*20, pnPosY*20, pnPosZ*20*20, pnWidthX*20, pnHeighY*20, pnDeptZ*20);
-        setTextID("Wall-" + Integer.toString(nIDEntity));
+        setTextID("Wall-" + nIDEntity);
         setClassID(WallObstacle.CLS_ID);
     }
 }

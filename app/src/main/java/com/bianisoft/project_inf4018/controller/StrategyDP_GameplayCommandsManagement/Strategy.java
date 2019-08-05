@@ -6,5 +6,5 @@ import com.bianisoft.project_inf4018.model.GameCommand;
 
 public interface Strategy {
 
-    public void execute(ArrayList<GameCommand> pArGameCommand, int pNIdxToStart);
+    void execute(ArrayList<GameCommand> pArGameCommand, int pNIdxToStart);
 }

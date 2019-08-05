@@ -21,19 +21,19 @@ public class Tunnel3D extends Object3D {
     public void loadRes(GL10 gl){
         super.loadRes(gl);
 
-        float baseVertices[]= {
-                -5.0f, -5.0f,  0.0f,    -5.0f, -5.0f,  5.0f,    -5.0f,  5.0f,  0.0f,    -5.0f,  5.0f,  5.0f,
-                5.0f, -5.0f,  0.0f,     5.0f, -5.0f,  5.0f,     5.0f,  5.0f,  0.0f,     5.0f,  5.0f,  5.0f,
+        float[] baseVertices = {
+                -5.0f, -5.0f, 0.0f, -5.0f, -5.0f, 5.0f, -5.0f, 5.0f, 0.0f, -5.0f, 5.0f, 5.0f,
+                5.0f, -5.0f, 0.0f, 5.0f, -5.0f, 5.0f, 5.0f, 5.0f, 0.0f, 5.0f, 5.0f, 5.0f,
         };
 
-        float baseTexture[]= {
-                0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f,		1.0f, 1.0f,
-                0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f,		1.0f, 1.0f,
+        float[] baseTexture = {
+                0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+                0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
         };
 
-        short baseIndices[]= {
-                0, 1, 2,    2, 1, 3,
-                5, 4, 7,    4, 6, 7
+        short[] baseIndices = {
+                0, 1, 2, 2, 1, 3,
+                5, 4, 7, 4, 6, 7
         };
 
 

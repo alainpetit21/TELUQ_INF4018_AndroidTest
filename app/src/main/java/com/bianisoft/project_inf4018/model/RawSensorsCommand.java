@@ -15,10 +15,4 @@ public class RawSensorsCommand {
 
         nAcceleratingZ= p_nAcceleratingZ;
     }
-
-    public int getRotationalSensorByDirectionalIdx(int p_nDirectionalIdx){
-        int arDirectionalIdx[]= {nRotationRoll, nRotationPitch, -nRotationRoll, -nRotationPitch};
-        
-        return arDirectionalIdx[p_nDirectionalIdx];
-    }
 }

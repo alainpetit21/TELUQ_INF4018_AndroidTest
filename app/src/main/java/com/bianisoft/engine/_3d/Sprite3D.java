@@ -17,16 +17,16 @@ public class Sprite3D extends Object3D{
     public void load(){
         super.load();
 
-        float vertices[]= {
-                -1.0f, -1.0f,  0.0f,	 1.0f, -1.0f,  0.0f,	-1.0f,  1.0f,  0.0f,	 1.0f,  1.0f,  0.0f,
+        float[] vertices = {
+                -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
         };
 
-        float texture[]= {
-                0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f,		1.0f, 1.0f,
+        float[] texture = {
+                0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
         };
 
-        short indices[]= {
-                0,   1,  2,    2,  1,  3,
+        short[] indices = {
+                0, 1, 2, 2, 1, 3,
         };
 
         ByteBuffer vbb= ByteBuffer.allocateDirect((m_nNbVertices= vertices.length) * 4);

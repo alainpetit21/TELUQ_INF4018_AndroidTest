@@ -27,6 +27,7 @@ package com.bianisoft.project_inf4018.view;
 //Bianisoft imports
 
 import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.manager.MngrSensorGyroscopicRotationAcceleration;
 import com.bianisoft.project_inf4018.R;
 import com.bianisoft.project_inf4018.controller.ApplicationFacade;
 import com.bianisoft.project_inf4018.controller.ModMgrRecorderPoster;
@@ -70,6 +71,7 @@ public class ScrGameScreen extends Screen {
         backCalibration.hide();
 
         MngrSensorPositionalMappingUsingGravity mngrSensorPosMapping = MngrSensorPositionalMappingUsingGravity.getInstance();
+        MngrSensorGyroscopicRotationAcceleration mngrSensorGyros = MngrSensorGyroscopicRotationAcceleration.getInstance();
         MngrTouchScreen mgrTouchScreen = MngrTouchScreen.getInstance();
 
         float[] nValuesSensorsXY = mngrSensorPosMapping.getPos();
@@ -77,14 +79,21 @@ public class ScrGameScreen extends Screen {
 
         if (nValueZ > -2) {
             nValueZ = -2;
-            mgrTouchScreen.setMovementY(nValueZ*50);
-        } else if (nValueZ < -20){
+            mgrTouchScreen.setMovementY(nValueZ * 50);
+        } else if (nValueZ < -20) {
             nValueZ = -20;
-            mgrTouchScreen.setMovementY(nValueZ*50);
+            mgrTouchScreen.setMovementY(nValueZ * 50);
         }
 
-        ApplicationFacade.getFacadeObject().addRawCommand((int)nValuesSensorsXY[0], (int)nValuesSensorsXY[1], (-nValueZ));
+        float[] data = mngrSensorGyros.getGyroData();
 
+        if (Math.abs(data[0]) > 0.1f)
+            ApplicationFacade.getFacadeObject().addRawGyroCommand((int)(data[0]*10), 0);
+
+        if (Math.abs(data[1]) > 0.1f)
+            ApplicationFacade.getFacadeObject().addRawGyroCommand(0, (int)(data[1]*10));
+
+        ApplicationFacade.getFacadeObject().addRawCommand((int)nValuesSensorsXY[0], (int)nValuesSensorsXY[1], (-nValueZ));
 
         ModMgrRecorderPoster mgrRecorderPoster= ApplicationFacade.getFacadeObject().getMgrRecorderPoster();
         int nPosClickX = mgrTouchScreen.getClickX();
