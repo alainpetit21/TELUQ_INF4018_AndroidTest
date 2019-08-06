@@ -14,7 +14,7 @@ public class ApplicationFacade {
     private ObserverRawSensorCommand objObserverRawSensorCommand;
     private ObserverGameCommand objObserverGameCommand;
     private ModMgrWorldPhysic modWorldPhysicManager;
-    private ModMgrRecorderPoster modRecordingPostingManager;
+    private ModMgrRecorder modRecordingManager;
     
     public boolean isRunning= false;
     
@@ -34,7 +34,7 @@ public class ApplicationFacade {
         objObserverRawSensorCommand = new ObserverRawSensorCommand();
         objObserverGameCommand = new ObserverGameCommand();
         modWorldPhysicManager = new ModMgrWorldPhysic();
-        modRecordingPostingManager = new ModMgrRecorderPoster();
+        modRecordingManager = new ModMgrRecorder();
     }
     
     public int GetRawStartIdx(){
@@ -49,8 +49,8 @@ public class ApplicationFacade {
         return modWorldPhysicManager;
     }
 
-    public ModMgrRecorderPoster getMgrRecorderPoster(){
-        return modRecordingPostingManager;
+    public ModMgrRecorder getMgrRecorder(){
+        return modRecordingManager;
     }
 
     public void IncrementRawSensorCommandIdxToStart(){

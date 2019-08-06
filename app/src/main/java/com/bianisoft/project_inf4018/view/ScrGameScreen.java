@@ -26,11 +26,13 @@ package com.bianisoft.project_inf4018.view;
 
 //Bianisoft imports
 
+import android.content.Intent;
+
 import com.bianisoft.engine.FrontendApp;
 import com.bianisoft.engine.manager.MngrSensorGyroscopicRotationAcceleration;
 import com.bianisoft.project_inf4018.R;
 import com.bianisoft.project_inf4018.controller.ApplicationFacade;
-import com.bianisoft.project_inf4018.controller.ModMgrRecorderPoster;
+import com.bianisoft.project_inf4018.controller.ModMgrRecorder;
 import com.bianisoft.engine.Screen;
 import com.bianisoft.engine._3d.Sprite3D;
 import com.bianisoft.engine.manager.MngrTouchScreen;
@@ -44,7 +46,8 @@ public class ScrGameScreen extends Screen {
     private GUICountainer   objGUICountainer;
     private WorldPresenter  objWorldPresenter;
     private Sprite3D backCalibration;
-
+    private Sprite3D backUpload;
+    public boolean hasRequestedServerUploading;
 
     public void activate(){
         addChild(objGUICountainer = new GUICountainer());
@@ -58,9 +61,17 @@ public class ScrGameScreen extends Screen {
         backCalibration.setPosZ(-1.5f);
         backCalibration.load();
 
+        addChild(backUpload = new Sprite3D(R.drawable.back_upload));
+        backUpload.setZoom(4f);
+        backUpload.setPosZ(-1.5f);
+        backUpload.load();
+        backUpload.hide();
+
         objCam.setPos(0f, 0.1f, -10f);
 
         MngrTouchScreen.getInstance().setMovementY(-2);
+
+        hasRequestedServerUploading = false;
 
         //We do this at the end IOT set the special flags for "finished Loading"
         super.activate();
@@ -95,7 +106,7 @@ public class ScrGameScreen extends Screen {
 
         ApplicationFacade.getFacadeObject().addRawCommand((int)nValuesSensorsXY[0], (int)nValuesSensorsXY[1], (-nValueZ));
 
-        ModMgrRecorderPoster mgrRecorderPoster= ApplicationFacade.getFacadeObject().getMgrRecorderPoster();
+        ModMgrRecorder mgrRecorderPoster= ApplicationFacade.getFacadeObject().getMgrRecorder();
         int nPosClickX = mgrTouchScreen.getClickX();
         int nPosClickY = mgrTouchScreen.getClickY();
 
@@ -110,12 +121,12 @@ public class ScrGameScreen extends Screen {
 
             }else if((nPosClickX > 600) && (nPosClickX < 750)) {
                 System.out.printf("\nSend - Click at Pos: %d, %d", nPosClickX, nPosClickY);
-                //mgrRecorderPoster.stop();
+                hasRequestedServerUploading= true;
+                backUpload.show();
 
             }else if((nPosClickX > 850) && (nPosClickX < 1050)) {
                 System.out.printf("\nQuit - Click at Pos: %d, %d", nPosClickX, nPosClickY);
                 FrontendApp.exit();
-                //Maybe do an intent and go back one screen
             }else {
                 System.out.printf("\nClick at Pos: %d, %d", nPosClickX, nPosClickY);
             }

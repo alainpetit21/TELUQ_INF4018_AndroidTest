@@ -4,7 +4,7 @@ import com.bianisoft.project_inf4018.R;
 import com.bianisoft.engine.Screen;
 import com.bianisoft.engine.Drawable;
 import com.bianisoft.project_inf4018.controller.ApplicationFacade;
-import com.bianisoft.project_inf4018.controller.ModMgrRecorderPoster;
+import com.bianisoft.project_inf4018.controller.ModMgrRecorder;
 import com.bianisoft.engine._3d.Sprite3D;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -19,7 +19,7 @@ public class GUIGroupToolbar extends Drawable{
 
     @Override
     public void draw(GL10 gl) {
-        ModMgrRecorderPoster modRecorderPoster= ApplicationFacade.getFacadeObject().getMgrRecorderPoster();
+        ModMgrRecorder modRecorderPoster= ApplicationFacade.getFacadeObject().getMgrRecorder();
 
         btRecord.show();
         btQuit.show();

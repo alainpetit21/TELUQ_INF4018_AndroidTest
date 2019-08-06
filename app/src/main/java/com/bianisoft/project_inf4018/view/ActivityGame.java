@@ -1,5 +1,6 @@
 package com.bianisoft.project_inf4018.view;
 
+import android.content.Intent;
 import android.opengl.GLSurfaceView;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -153,6 +154,12 @@ public class ActivityGame extends AppCompatActivity {
 
             if (app.hasGoneThroughCalibration) {
                 objApp.manage();
+            }
+
+            if(((ScrGameScreen)objApp.getCurScreen()).hasRequestedServerUploading) {
+                Intent intentSwitchTitleToSend = new Intent(this, ActivitySend.class);
+                startActivity(intentSwitchTitleToSend);
+                ((ScrGameScreen)objApp.getCurScreen()).hasRequestedServerUploading = false;
             }
 
             glSurfaceView.requestRender();
