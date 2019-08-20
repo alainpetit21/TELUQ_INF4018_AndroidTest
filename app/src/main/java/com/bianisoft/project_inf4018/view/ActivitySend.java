@@ -9,13 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.bianisoft.engine.FrontendApp;
 import com.bianisoft.project_inf4018.R;
 import com.bianisoft.project_inf4018.controller.ApplicationFacade;
 import com.bianisoft.project_inf4018.controller.ModMgrPosterToServer;
-import com.bianisoft.project_inf4018.controller.ModMgrRecorder;
-
-import java.io.IOException;
 
 public class ActivitySend extends AppCompatActivity {
     private Button btSendSendData;

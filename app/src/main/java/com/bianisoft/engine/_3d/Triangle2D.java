@@ -1,14 +1,12 @@
 package com.bianisoft.engine._3d;
 
-import android.content.Context;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Triangle2D extends Object3D {
+public class Triangle2D extends Drawable3D {
     private static final int TYPE_OTHER = 0x03;
 
     private int m_nNbColors;

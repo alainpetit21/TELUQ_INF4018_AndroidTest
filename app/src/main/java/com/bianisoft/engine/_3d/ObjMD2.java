@@ -2,7 +2,7 @@ package com.bianisoft.engine._3d;
 
 import android.content.Context;
 
-import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.PresentationApp;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.nio.ByteOrder;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class ObjMD2 extends Object3D {
+public class ObjMD2 extends Drawable3D {
     private static final int TYPE_MD2= 0x01;
 
     private int	    m_nResMesh;
@@ -41,7 +41,7 @@ public class ObjMD2 extends Object3D {
     public void loadRes(GL10 gl) {
         super.loadRes(gl);
 
-        loadModel(gl, FrontendApp.getContext());
+        loadModel(gl, PresentationApp.getContext());
     }
 
     public void loadModel(GL10 gl, Context context) {

@@ -20,8 +20,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 
 public class GUIGroupRoll extends Drawable{
-    private Sprite3D sprBackGUIGroupRoll;
-    private Triangle3D sprNeedle;
+    private Sprite3D    sprBackGUIGroupRoll;
+    private Triangle3D  sprNeedle;
     private Label2D     lblWrittenValue;
     private Label2D     lblAccelValue;
     private float       nValue= 0;

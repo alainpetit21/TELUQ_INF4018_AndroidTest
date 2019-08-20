@@ -9,7 +9,7 @@ import android.graphics.PointF;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 
-import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.PresentationApp;
 import com.bianisoft.engine.PhysObj;
 import com.bianisoft.engine.Screen;
 
@@ -28,10 +28,10 @@ public class MngrGLRendererAndroid implements Renderer {
         gl.glClearColor(.5f, .5f,0.5f,1f);
         gl.glClearDepthf(1f);
 
-        FrontendApp.setGL(gl);
+        PresentationApp.setGL(gl);
 
         //Go through all object in app and reload the textures, and activate the Screen
-        Screen curScr = FrontendApp.getFrontendApp().getCurScreen();
+        Screen curScr = PresentationApp.getAppInstance().getCurScreen();
         if(curScr != null) {
             curScr.loadAllRes(gl);
         }
@@ -47,7 +47,7 @@ public class MngrGLRendererAndroid implements Renderer {
         gl.glFrustumf(-1, 1, -1, 1, 1, 100);  // apply the projection matrix
 
         //Go through all object in app and reload the textures, and activate the Screen
-        Screen curScr = FrontendApp.getFrontendApp().getCurScreen();
+        Screen curScr = PresentationApp.getAppInstance().getCurScreen();
         if(curScr != null) {
             curScr.loadAllRes(gl);
         }
@@ -66,8 +66,8 @@ public class MngrGLRendererAndroid implements Renderer {
         float lookAtY = 0;
         float lookAtZ = 10;
 
-        if(FrontendApp.getFrontendApp().getCurScreen() != null){
-            PhysObj objLockedOn= FrontendApp.getFrontendApp().getCurScreen().objCam;
+        if(PresentationApp.getAppInstance().getCurScreen() != null){
+            PhysObj objLockedOn= PresentationApp.getAppInstance().getCurScreen().objCam;
 
             if(objLockedOn != null) {
                 lookAtX = objLockedOn.getPosX();
@@ -81,13 +81,13 @@ public class MngrGLRendererAndroid implements Renderer {
 
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
-        if(FrontendApp.getFrontendApp().getCurScreen() != null)
-            FrontendApp.getFrontendApp().getCurScreen().draw(gl);
+        if(PresentationApp.getAppInstance().getCurScreen() != null)
+            PresentationApp.getAppInstance().getCurScreen().draw(gl);
     }
 
     public void onDestroy() {
         //Go through all object in app and reload the textures, and activate the Screen
-        Screen curScr = FrontendApp.getFrontendApp().getCurScreen();
+        Screen curScr = PresentationApp.getAppInstance().getCurScreen();
         if(curScr != null) {
             curScr.deActivate();
         }

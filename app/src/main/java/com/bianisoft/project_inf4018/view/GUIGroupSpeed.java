@@ -17,8 +17,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 
 public class GUIGroupSpeed extends Drawable implements IDomainRawSensorObserver{
-    private Sprite3D sprBackGUIGroupSpeed;
-    private Triangle3D sprNeedle;
+    private Sprite3D    sprBackGUIGroupSpeed;
+    private Triangle3D  sprNeedle;
     private Label2D     lblWrittenValue;
     private float       nValue= 0;
 

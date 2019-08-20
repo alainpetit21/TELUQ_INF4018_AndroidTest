@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import javax.microedition.khronos.opengles.GL10;
 
 
-public class FrontendApp extends Application {
+public class PresentationApp extends Application {
     private static Context mContext;
     private static GL10 objGL;
-    private static FrontendApp theApp;
+    private static PresentationApp theApp;
 
     private ArrayList<Int> arStackScreenIdx;
     private Screen m_scrCur;
@@ -26,7 +26,7 @@ public class FrontendApp extends Application {
     private boolean isRunning;
 
 
-    public FrontendApp(String p_stName){
+    public PresentationApp(String p_stName){
         stGameName = p_stName;
         theApp = this;
 
@@ -35,16 +35,16 @@ public class FrontendApp extends Application {
         isRunning = true;
     }
 
-    public static FrontendApp get(){
-        return FrontendApp.theApp;
+    public static PresentationApp get(){
+        return PresentationApp.theApp;
     }
 
     public static void exit(){
-        FrontendApp.theApp.isRunning = false;
+        PresentationApp.theApp.isRunning = false;
     }
 
     public static boolean isRunning(){
-        return FrontendApp.theApp.isRunning;
+        return PresentationApp.theApp.isRunning;
     }
 
     public static Context getContext() {
@@ -52,7 +52,7 @@ public class FrontendApp extends Application {
     }
 
     public static void setContext(Context mContext) {
-        FrontendApp.mContext = mContext;
+        PresentationApp.mContext = mContext;
     }
 
     public static GL10 getGL10() {
@@ -60,11 +60,11 @@ public class FrontendApp extends Application {
     }
 
     public static void setGL(GL10 pGL10) {
-        FrontendApp.objGL = pGL10;
+        PresentationApp.objGL = pGL10;
     }
 
-    public static FrontendApp getFrontendApp() {
-        return FrontendApp.theApp;
+    public static PresentationApp getAppInstance() {
+        return PresentationApp.theApp;
     }
 
     public Screen getCurScreen(){
@@ -94,7 +94,7 @@ public class FrontendApp extends Application {
     }
 
     public void destroy(){
-        FrontendApp.setContext(null);
+        PresentationApp.setContext(null);
     }
 
 
@@ -104,7 +104,7 @@ public class FrontendApp extends Application {
 //        float nRationTime= (nthisFrameTick - nlastFrameTick)/16666667.0f;
         float nRationTime= 1f;
 
-        FrontendApp.theApp.m_scrCur.manage(nRationTime);
+        PresentationApp.theApp.m_scrCur.manage(nRationTime);
 
         nlastFrameTick = nthisFrameTick;
         nCptLoop += 1;

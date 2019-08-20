@@ -9,7 +9,7 @@ import java.nio.ByteOrder;
 import javax.microedition.khronos.opengles.GL10;
 
 
-public class Pyramid3D extends Object3D{
+public class Pyramid3D extends Drawable3D {
     private static final int TYPE_OTHER= 0x03;
 
 

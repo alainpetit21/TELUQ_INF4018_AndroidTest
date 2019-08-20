@@ -9,7 +9,7 @@ import java.nio.ByteOrder;
 import javax.microedition.khronos.opengles.GL10;
 
 
-public class Cube3D extends Object3D{
+public class Cube3D extends Drawable3D {
     private static final int TYPE_OTHER= 0x03;
 
     float[] vertices3 = {

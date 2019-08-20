@@ -3,7 +3,7 @@ package com.bianisoft.engine._2d;
 import android.content.Context;
 
 import com.bianisoft.engine.Drawable;
-import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.PresentationApp;
 import com.bianisoft.engine.manager.MngrFont.GLText;
 
 
@@ -25,7 +25,7 @@ public class Label2D extends Drawable {
 
     public void loadRes(GL10 gl) {
         super.loadRes(gl);
-        loadTypeface(gl, FrontendApp.getContext());
+        loadTypeface(gl, PresentationApp.getContext());
     }
 
     public void loadTypeface(GL10 gl, Context context){

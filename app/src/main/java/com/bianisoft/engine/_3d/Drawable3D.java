@@ -40,13 +40,13 @@ import java.nio.ByteOrder;
 //Bianisoft library imports
 //import com.bianisoft.engine.resmng.ImageCache;
 //import com.bianisoft.engine.resmng.Texture;
-import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.PresentationApp;
 import com.bianisoft.engine.Drawable;
 
 import javax.microedition.khronos.opengles.GL10;
 
 
-public class Object3D extends Drawable{
+public class Drawable3D extends Drawable{
     protected int nResTexture;
     protected int[] textureIDs;
 
@@ -59,8 +59,8 @@ public class Object3D extends Drawable{
     protected int 	m_nNbIndices;
 
 
-    public Object3D()	{super(IDCLASS_Object3D);}
-    public Object3D(int p_nResIDTexture){
+    public Drawable3D()	{super(IDCLASS_Object3D);}
+    public Drawable3D(int p_nResIDTexture){
         super(IDCLASS_Object3D);
 
         nResTexture = p_nResIDTexture;
@@ -68,7 +68,7 @@ public class Object3D extends Drawable{
         textureIDs = new int[1];   // Array for 1 texture-ID (NEW)
     }
 
-    public Object3D(Object3D p_obj3D){
+    public Drawable3D(Drawable3D p_obj3D){
         this();
 
         nResTexture = p_obj3D.nResTexture;
@@ -91,7 +91,7 @@ public class Object3D extends Drawable{
     public void loadRes(GL10 gl) {
         super.loadRes(gl);
 
-        loadTexture(gl, FrontendApp.getContext());
+        loadTexture(gl, PresentationApp.getContext());
     }
 
     // Load an image into GL texture
@@ -153,6 +153,6 @@ public class Object3D extends Drawable{
     }
 
     public String toString(){
-        return "Object3D @ " + (int)getPosX() + ";"+ (int)getPosY() + ";"+ (int)getPosZ() + ";";
+        return "Drawable3D @ " + (int)getPosX() + ";"+ (int)getPosY() + ";"+ (int)getPosZ() + ";";
     }
 }

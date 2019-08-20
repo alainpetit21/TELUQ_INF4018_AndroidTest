@@ -28,7 +28,7 @@ package com.bianisoft.engine;
 import java.util.ArrayList;
 
 //Bianisoft imports
-import com.bianisoft.engine._3d.Object3D;
+import com.bianisoft.engine._3d.Drawable3D;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -68,15 +68,15 @@ public class Screen extends Obj{
     public void removeAllChilds(){
     }
 
-    public void removeChild(Object3D p_obj){
+    public void removeChild(Drawable3D p_obj){
     }
 
     public void removeChild(Drawable p_obj){
     }
 
-    public void addChild(Object3D p_obj3D)	{addChild(p_obj3D, false, false);}
-    public void addChild(Object3D p_obj3D, boolean p_isAttachedToCamera)	{addChild(p_obj3D, p_isAttachedToCamera, false);}
-    public void addChild(Object3D p_obj3D, boolean p_isAttachedToCamera, boolean p_isInInfinity){
+    public void addChild(Drawable3D p_obj3D)	{addChild(p_obj3D, false, false);}
+    public void addChild(Drawable3D p_obj3D, boolean p_isAttachedToCamera)	{addChild(p_obj3D, p_isAttachedToCamera, false);}
+    public void addChild(Drawable3D p_obj3D, boolean p_isAttachedToCamera, boolean p_isInInfinity){
         arPhysObj.add(p_obj3D);
     }
 

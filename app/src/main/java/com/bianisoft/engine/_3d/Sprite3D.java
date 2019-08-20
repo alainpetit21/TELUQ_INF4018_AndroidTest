@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 
-public class Sprite3D extends Object3D{
+public class Sprite3D extends Drawable3D {
     private static final int TYPE_OTHER= 0x03;
 
 

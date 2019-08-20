@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PrototypeTELUQ_INF4018</string>
+    <string name="app_name">TELUQ_INF4018</string>
     <string name="Lbl_Title_Launch_Game">Launch Game!!</string>
     <string name="Lbl_Title_Quit_Game">Quit</string>
     <string name="Lbl_Title_ServerAddress">Server Address</string>

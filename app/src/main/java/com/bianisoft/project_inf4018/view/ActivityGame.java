@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
-import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.PresentationApp;
 import com.bianisoft.engine.manager.MngrSensorGyroscopicRotationAcceleration;
 import com.bianisoft.engine.manager.MngrTouchScreen;
 import com.bianisoft.engine.manager.MngrGLRendererAndroid;
@@ -17,7 +17,7 @@ import com.bianisoft.project_inf4018.model.DomainFacade;
 
 
 public class ActivityGame extends AppCompatActivity {
-    private AppPrototypeTELUQ_INF4018 objApp;
+    private AppTELUQ_INF4018 objApp;
     private GLSurfaceView glSurfaceView;
 
     private MngrGLRendererAndroid objMngrRenderer;
@@ -73,8 +73,8 @@ public class ActivityGame extends AppCompatActivity {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        objApp= new AppPrototypeTELUQ_INF4018();
-        FrontendApp.setContext(this);
+        objApp= new AppTELUQ_INF4018();
+        PresentationApp.setContext(this);
 
         objMngrRenderer = new MngrGLRendererAndroid();
         glSurfaceView = new GLSurfaceView(this);
@@ -125,9 +125,9 @@ public class ActivityGame extends AppCompatActivity {
 
 
     protected void onTimerGameLoading(Runnable pRunnable){
-        AppPrototypeTELUQ_INF4018 app= (AppPrototypeTELUQ_INF4018)FrontendApp.get();
+        AppTELUQ_INF4018 app= (AppTELUQ_INF4018) PresentationApp.get();
 
-        if ((FrontendApp.getGL10() != null) && !app.hasGoneThroughLoading){
+        if ((PresentationApp.getGL10() != null) && !app.hasGoneThroughLoading){
             objApp.create();
             app.hasGoneThroughLoading = true;
         }else {
@@ -136,7 +136,7 @@ public class ActivityGame extends AppCompatActivity {
     }
 
     protected void onTimerGameCalibratingSensors(Runnable pRunnable){
-        AppPrototypeTELUQ_INF4018 app= (AppPrototypeTELUQ_INF4018)FrontendApp.get();
+        AppTELUQ_INF4018 app= (AppTELUQ_INF4018) PresentationApp.get();
 
         if(!app.hasGoneThroughCalibration){
             app.hasGoneThroughCalibration = true;
@@ -144,9 +144,9 @@ public class ActivityGame extends AppCompatActivity {
     }
 
     protected void onTimerGameLoop(Runnable pRunnable){
-        AppPrototypeTELUQ_INF4018 app= (AppPrototypeTELUQ_INF4018)FrontendApp.get();
+        AppTELUQ_INF4018 app= (AppTELUQ_INF4018) PresentationApp.get();
 
-        if(FrontendApp.isRunning()) {
+        if(PresentationApp.isRunning()) {
             if (!app.hasGoneThroughLoading) {
                 objApp.create();
                 app.hasGoneThroughLoading = true;

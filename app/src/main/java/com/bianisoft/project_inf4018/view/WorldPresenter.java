@@ -32,8 +32,8 @@ public class WorldPresenter extends Drawable{
         }
     }
 
-    Tunnel3D objTunnel;
-    Pyramid3D obj3DSpaceship;
+    Tunnel3D            objTunnel;
+    Pyramid3D           obj3DSpaceship;
     ArrayList<Cube3D>   arWalls;
    
     

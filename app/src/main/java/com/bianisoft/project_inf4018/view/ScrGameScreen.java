@@ -26,9 +26,7 @@ package com.bianisoft.project_inf4018.view;
 
 //Bianisoft imports
 
-import android.content.Intent;
-
-import com.bianisoft.engine.FrontendApp;
+import com.bianisoft.engine.PresentationApp;
 import com.bianisoft.engine.manager.MngrSensorGyroscopicRotationAcceleration;
 import com.bianisoft.project_inf4018.R;
 import com.bianisoft.project_inf4018.controller.ApplicationFacade;
@@ -126,16 +124,12 @@ public class ScrGameScreen extends Screen {
 
             }else if((nPosClickX > 850) && (nPosClickX < 1050)) {
                 System.out.printf("\nQuit - Click at Pos: %d, %d", nPosClickX, nPosClickY);
-                FrontendApp.exit();
+                PresentationApp.exit();
             }else {
                 System.out.printf("\nClick at Pos: %d, %d", nPosClickX, nPosClickY);
             }
             mgrTouchScreen.resetClicksystem();
         }
-    }
-
-    public void draw(GL10 gl) {
-        super.draw(gl);
     }
 }
 
