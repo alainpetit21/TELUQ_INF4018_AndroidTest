@@ -13,12 +13,17 @@ import com.bianisoft.engine.PresentationApp;
 import com.bianisoft.engine.PhysObj;
 import com.bianisoft.engine.Screen;
 
+
 public class MngrGLRendererAndroid implements Renderer {
+    private static MngrGLRendererAndroid objThisInstance;
+
     protected ShortBuffer m_bufVertices;
     protected ShortBuffer m_bufVertices2;
     private PointF surfaceSize;
 
+
     public MngrGLRendererAndroid(){
+        objThisInstance = this;
         surfaceSize = new PointF();
     }
 
@@ -41,6 +46,8 @@ public class MngrGLRendererAndroid implements Renderer {
         gl.glViewport(0, 0, width, height);
 
         float ratio = (float) width / height;
+        surfaceSize.x = width;
+        surfaceSize.y = height;
 
         gl.glMatrixMode(GL10.GL_PROJECTION);        // set matrix to projection mode
         gl.glLoadIdentity();                        // reset the matrix to its default state
@@ -51,10 +58,6 @@ public class MngrGLRendererAndroid implements Renderer {
         if(curScr != null) {
             curScr.loadAllRes(gl);
         }
-    }
-
-    public void onDrawFrameDebug(GL10 gl) {
-
     }
 
     public void onDrawFrame(GL10 gl) {
@@ -97,5 +100,17 @@ public class MngrGLRendererAndroid implements Renderer {
     }
 
     public void onPause() {
+    }
+
+    public int getSurfaceWidth() {
+        return (int)surfaceSize.x;
+    }
+
+    public int getSurfaceHeight() {
+        return (int)surfaceSize.y;
+    }
+
+    public static MngrGLRendererAndroid getInstance(){
+        return objThisInstance;
     }
 }

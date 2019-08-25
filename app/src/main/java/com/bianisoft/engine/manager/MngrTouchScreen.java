@@ -72,14 +72,21 @@ public class MngrTouchScreen implements View.OnTouchListener {
 
     //Try to Change that to observer Pattern
     public int getClickX(){
-        return nPosLastClickX;
+        MngrGLRendererAndroid objRenderer= MngrGLRendererAndroid.getInstance();
+        float value =  (float)nPosLastClickX / (float)objRenderer.getSurfaceWidth() * 100.0f;
+
+        return (int)value;
     }
 
     public int getClickY(){
-        return nPosLastClickY;
+        MngrGLRendererAndroid objRenderer= MngrGLRendererAndroid.getInstance();
+        float value =  (float)nPosLastClickY / (float)objRenderer.getSurfaceHeight() * 100.0f;
+
+        return (int)value;
     }
 
     public int resetClicksystem(){
+
         return nPosLastClickY= nPosLastClickX= -1;
     }
 

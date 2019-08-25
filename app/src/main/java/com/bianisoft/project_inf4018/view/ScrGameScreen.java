@@ -108,21 +108,24 @@ public class ScrGameScreen extends Screen {
         int nPosClickX = mgrTouchScreen.getClickX();
         int nPosClickY = mgrTouchScreen.getClickY();
 
-        if(nPosClickY > 1550){
-            if((nPosClickX > 50) && (nPosClickX < 250)) {
+        if(nPosClickY > -1)
+            System.out.print("Test");
+
+       if(nPosClickY >= 93){
+            if((nPosClickX >= 3) && (nPosClickX <= 20)) {
                 System.out.printf("\nRecord - Click at Pos: %d, %d", nPosClickX, nPosClickY);
                 mgrRecorderPoster.start();
 
-            }else if((nPosClickX > 300) && (nPosClickX < 500)) {
+            }else if((nPosClickX >= 27) && (nPosClickX <= 44)) {
                 System.out.printf("\nRecord - Click at Pos: %d, %d", nPosClickX, nPosClickY);
                 mgrRecorderPoster.stop();
 
-            }else if((nPosClickX > 600) && (nPosClickX < 750)) {
+            }else if((nPosClickX >= 54) && (nPosClickX <= 71)) {
                 System.out.printf("\nSend - Click at Pos: %d, %d", nPosClickX, nPosClickY);
                 hasRequestedServerUploading= true;
                 backUpload.show();
 
-            }else if((nPosClickX > 850) && (nPosClickX < 1050)) {
+            }else if((nPosClickX >= 79) && (nPosClickX <= 96)) {
                 System.out.printf("\nQuit - Click at Pos: %d, %d", nPosClickX, nPosClickY);
                 PresentationApp.exit();
             }else {
