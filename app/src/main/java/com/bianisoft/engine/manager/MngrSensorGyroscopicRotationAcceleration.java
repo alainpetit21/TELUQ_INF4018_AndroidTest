@@ -17,8 +17,8 @@ public class MngrSensorGyroscopicRotationAcceleration implements SensorEventList
 
     private SensorManager objAndroidSensorMngr;
     private Sensor objSensorGyroscope;
-    private float[] vGyroscope = null;
-    private long lastUpdateGyscope = 0;
+    private float[] vGyroscope;
+    private long lastUpdateGyscope;
 
 
     public MngrSensorGyroscopicRotationAcceleration(Context objContext){
@@ -53,7 +53,7 @@ public class MngrSensorGyroscopicRotationAcceleration implements SensorEventList
                 vGyroscope[1] = event.values[1];
                 vGyroscope[2] = event.values[2];
 
-                System.out.printf("Got Gyro Data : %2.5f\t%2.5f\t%2.5f\n", vGyroscope[0], vGyroscope[1], vGyroscope[2]);
+                // System.out.printf("Got Gyro Data : %2.5f\t%2.5f\t%2.5f\n", vGyroscope[0], vGyroscope[1], vGyroscope[2]);
             }
         }
     }

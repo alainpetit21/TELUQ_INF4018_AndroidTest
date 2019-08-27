@@ -45,7 +45,8 @@ public class ScrGameScreen extends Screen {
     private WorldPresenter  objWorldPresenter;
     private Sprite3D backCalibration;
     private Sprite3D backUpload;
-    public boolean hasRequestedServerUploading;
+    boolean hasRequestedServerUploading;
+
 
     public void activate(){
         addChild(objGUICountainer = new GUICountainer());
@@ -107,9 +108,6 @@ public class ScrGameScreen extends Screen {
         ModMgrRecorder mgrRecorderPoster= ApplicationFacade.getFacadeObject().getMgrRecorder();
         int nPosClickX = mgrTouchScreen.getClickX();
         int nPosClickY = mgrTouchScreen.getClickY();
-
-        if(nPosClickY > -1)
-            System.out.print("Test");
 
        if(nPosClickY >= 93){
             if((nPosClickX >= 3) && (nPosClickX <= 20)) {
